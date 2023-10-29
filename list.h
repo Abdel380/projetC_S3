@@ -14,6 +14,7 @@ void display_list_by_level(t_list lst, int level);
 int get_size_list(t_list lst);
 int * from_list_to_tab(t_list lst);
 void display_list(t_list lst);
+void insert_cell_level(t_list * lst, p_cell cell, int level);
 void insert_cell(t_list * lst, p_cell cell);
 
 
