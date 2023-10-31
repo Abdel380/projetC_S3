@@ -1,7 +1,3 @@
-//
-// Created by alex on 24/10/2023.
-//
-
 #include "list.h"
 
 
@@ -16,6 +12,37 @@ t_list create_empty_list(int max_size){
         list.heads[i] = NULL;
     }
 
+    return list;
+}
+
+int power(int a, int b){
+    int result = 1;
+    for (int i=0; i<b; i++)
+        result = result * a;
+    return result;
+}
+
+t_list create_list(int size){
+    t_list list = create_empty_list(size);
+    int * tab = calloc(power(2, size), sizeof(int)); // On prend un tableau de power(2, size) valeur car on se passera de la première case mais on prendra une case en plus à la fin
+    int indice = 0;
+    for (int i=0; i<size; i++){
+        indice = 0;
+        while (indice<(power(2, size))){
+            tab[indice] = i;
+            indice = indice + power(2, i);
+        }
+    }
+
+
+
+    if (size > 0){
+        p_cell temp;
+        for (int i = 1; i<power(2, size); i++){
+            temp = createCell(i,tab[i]);
+            insert_cell(&list, temp);
+        }
+    }
     return list;
 }
 
@@ -84,56 +111,13 @@ void display_list(t_list lst){
 
 
 void insert_cell_level(t_list * lst, p_cell cell, int level){
-    /*p_cell temp = lst->heads[0];
-    p_cell prev = temp;
-    while (temp->value < cell->value){
-        prev = temp;
-        temp = temp->nexts[0];
-    }
-    for (int i=0; i<level; i++){
-        cell->nexts[i] = temp->nexts[i];
-        prev->nexts[i] = cell;
-    }*/
-
-
-
-
-
-
-    /*p_cell temp = lst->heads[level-1];
-    p_cell prev = NULL;
-
-    if(cell->value < temp->value){ // si la valeur est plus petite que la tete
-        add_head_list(lst,cell);
-        return;
-
-
-    }
-
-    while (temp != NULL && cell->value > temp->value) {
-
-        prev = temp; // stocke la val prec
-        temp = temp->nexts[level-1]; // passe au suivant
-    }
-
-
-    if( temp != NULL) {
-        prev->nexts[level-1] = cell;
-        cell->nexts[level-1] = temp;
-
-    }
-    else{
-        temp = cell;
-
-    }*/
-
 }
 
 
 void insert_cell(t_list * lst, p_cell cell){
     p_cell temp = NULL; // Initialisation d'un pointeur temporaire à NULL
 
-    for (int i = 0; i < cell->level; i++){ // Boucle parcourant les niveaux de la cellule
+    for (int i = 0; i < cell->level+1; i++){ // Boucle parcourant les niveaux de la cellule
         if (lst->heads[i] == NULL || lst->heads[i]->value >= cell->value) { // Si la liste est vide ou si la valeur de la tête est supérieure ou égale à la valeur de la cellule
             cell->nexts[i] = lst->heads[i]; // La cellule devient la nouvelle tête de liste
             lst->heads[i] = cell;
@@ -149,8 +133,41 @@ void insert_cell(t_list * lst, p_cell cell){
     }
 }
 
+int level_0_research_cell(p_cell cell, int val){
+
+
+    while ( cell != NULL){
+        if ( cell->value == val){
+            return 1;
+        }
+        cell = cell->nexts[0];
+    }
+
+    return 0;
+}
+
+int level_0_research_list(t_list list, int val){
+
+    return level_0_research_cell(list.heads[0], val);
+
+}
 
 
 
+int dichotomie_research_cell(t_list lst, p_cell cell, int value){
+    if(value == cell->value){
+        printf("bingo\n");
+        return 1;
+    }
+    else if ((cell->value < value) && (cell->level > 0)){
+        for (int i=0; i<lst.max_level; i++){
+            lst.heads[i] = cell->nexts[i];
+        }
+        return dichotomie_research_cell(lst, cell->nexts[cell->level - 1], value) != 0;
+    }
 
-
+    {
+        printf("gauche\n");
+        return dichotomie_research_cell(lst,lst.heads[cell->level - 1], value) != 0;
+    }
+}
