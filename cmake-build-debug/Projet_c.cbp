@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Projet_c"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Projet_c">
+				<Option output="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Projet_c.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projet_c"/>
+					<CompileFile command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Projet_c/fast">
+				<Option output="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Projet_c.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projet_c/fast"/>
+					<CompileFile command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/alex/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/alex/CLionProjects/projetC_S32/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/cell.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/cell.h">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/fonctions.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/fonctions.h">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/list.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/list.h">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/main.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
