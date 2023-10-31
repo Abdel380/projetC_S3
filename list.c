@@ -34,13 +34,23 @@ void add_head_list(t_list * lst, p_cell cell) {
 
 void display_list_by_level(t_list lst, int level){
     level--; // Par convention on affiche la ligne 0 pour le level un
-    printf("[list head_%d @-]--", level);
-    p_cell cell = lst.heads[0];
-    while(lst.heads[level] != NULL){ // tete de niveau n'est pas a la fin
-        printf(">[%d|@-]--",lst.heads[level]->value);
-        lst.heads[level] = lst.heads[level]->nexts[level];
+    printf("[list head_%d @-]", level);
+    p_cell base = lst.heads[0];
+    p_cell cell = lst.heads[level];
+    while (base != NULL){
+        if (base == cell){
+            printf("-->[%d|@-]",cell->value);
+            cell = cell->nexts[level];
+        }
+        else{
+            if (base->value < 10)
+                printf("---------");
+            else
+                printf("----------");
+        }
+        base = base->nexts[0];
     }
-    printf(">NULL\n");
+    printf("-->NULL\n");
 }
 
 int get_size_list(t_list lst){
