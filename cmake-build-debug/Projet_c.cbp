@@ -76,16 +76,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/agenda.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/agenda.h">
+			<Option target="Projet_c"/>
+		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/cell.c">
 			<Option target="Projet_c"/>
 		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/cell.h">
-			<Option target="Projet_c"/>
-		</Unit>
-		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/fonctions.c">
-			<Option target="Projet_c"/>
-		</Unit>
-		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/fonctions.h">
 			<Option target="Projet_c"/>
 		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/list.c">
@@ -95,6 +95,12 @@
 			<Option target="Projet_c"/>
 		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/main.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/rdv.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/rdv.h">
 			<Option target="Projet_c"/>
 		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/timer.c">

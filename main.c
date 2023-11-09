@@ -1,8 +1,8 @@
-#include <stdio.h>
+
 #include "list.h"
 #include "timer.h"
 #include "time.h"
-#include "fonctions.h"
+#include "agenda.h"
 
 int main() {
     /*int size = 10;
@@ -14,9 +14,14 @@ int main() {
         present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
     stopTimer();
     displayTime();*/
+    p_CONTACT contact = create_contact();
+    display_contact(*contact);
 
-    char * name = scan_name();
-    printf("%s", name);
+    //p_RDV = create_rdv();
+    //RDV_OBJET objet = create_objet();
+    //display_objet(objet);
+    //p_RDV rdv = create_rdv();
+    //display_rdv(rdv);
 
 
 

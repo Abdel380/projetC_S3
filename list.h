@@ -8,6 +8,8 @@ typedef struct s_list
     int max_level;
 } t_list, *p_list;
 
+
+
 t_list create_empty_list(int max_size);
 int power(int a, int b);
 t_list create_list(int size);

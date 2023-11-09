@@ -4,10 +4,19 @@ project(Projet_c C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(Projet_c main.c
-        fonctions.c
-        fonctions.h
         cell.c
         cell.h
         list.c
         list.h
-        timer.c)
+        timer.c
+        rdv.c
+        rdv.h
+        agenda.c
+        agenda.h
+        rdv.c
+        rdv.c
+        rdv.c
+        rdv.c
+        rdv.c
+        rdv.c
+)

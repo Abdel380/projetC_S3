@@ -128,6 +128,30 @@ Projet_c/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/build
 .PHONY : Projet_c/fast
 
+agenda.obj: agenda.c.obj
+.PHONY : agenda.obj
+
+# target to build an object file
+agenda.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/agenda.c.obj
+.PHONY : agenda.c.obj
+
+agenda.i: agenda.c.i
+.PHONY : agenda.i
+
+# target to preprocess a source file
+agenda.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/agenda.c.i
+.PHONY : agenda.c.i
+
+agenda.s: agenda.c.s
+.PHONY : agenda.s
+
+# target to generate assembly for a file
+agenda.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/agenda.c.s
+.PHONY : agenda.c.s
+
 cell.obj: cell.c.obj
 .PHONY : cell.obj
 
@@ -151,30 +175,6 @@ cell.s: cell.c.s
 cell.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/cell.c.s
 .PHONY : cell.c.s
-
-fonctions.obj: fonctions.c.obj
-.PHONY : fonctions.obj
-
-# target to build an object file
-fonctions.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/fonctions.c.obj
-.PHONY : fonctions.c.obj
-
-fonctions.i: fonctions.c.i
-.PHONY : fonctions.i
-
-# target to preprocess a source file
-fonctions.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/fonctions.c.i
-.PHONY : fonctions.c.i
-
-fonctions.s: fonctions.c.s
-.PHONY : fonctions.s
-
-# target to generate assembly for a file
-fonctions.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/fonctions.c.s
-.PHONY : fonctions.c.s
 
 list.obj: list.c.obj
 .PHONY : list.obj
@@ -224,6 +224,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/main.c.s
 .PHONY : main.c.s
 
+rdv.obj: rdv.c.obj
+.PHONY : rdv.obj
+
+# target to build an object file
+rdv.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/rdv.c.obj
+.PHONY : rdv.c.obj
+
+rdv.i: rdv.c.i
+.PHONY : rdv.i
+
+# target to preprocess a source file
+rdv.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/rdv.c.i
+.PHONY : rdv.c.i
+
+rdv.s: rdv.c.s
+.PHONY : rdv.s
+
+# target to generate assembly for a file
+rdv.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/rdv.c.s
+.PHONY : rdv.c.s
+
 timer.obj: timer.c.obj
 .PHONY : timer.obj
 
@@ -257,18 +281,21 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Projet_c
+	@echo ... agenda.obj
+	@echo ... agenda.i
+	@echo ... agenda.s
 	@echo ... cell.obj
 	@echo ... cell.i
 	@echo ... cell.s
-	@echo ... fonctions.obj
-	@echo ... fonctions.i
-	@echo ... fonctions.s
 	@echo ... list.obj
 	@echo ... list.i
 	@echo ... list.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... rdv.obj
+	@echo ... rdv.i
+	@echo ... rdv.s
 	@echo ... timer.obj
 	@echo ... timer.i
 	@echo ... timer.s
