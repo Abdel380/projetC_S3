@@ -6,6 +6,7 @@
 #define PROJET_C_FONCTIONS_H
 
 #include "list.h"
+#include "string.h"
 
 typedef struct{
     char * nom;
@@ -29,7 +30,7 @@ typedef struct{
 }RDV_DUREE;
 
 typedef struct{
-    char * objet;
+    char * contenu;
 }RDV_OBJET;
 
 typedef struct{
@@ -39,14 +40,42 @@ typedef struct{
     RDV_OBJET objet;
 }RDV;
 
-DATE* initialise_date();
 
-void saisir_date(DATE * );
-
-CONTACT * initialise_contact();
+CONTACT* empty_contact();
 
 void saisir_contact(CONTACT * );
 
+DATE* empty_date();
+
+void saisir_date(DATE * );
+
+CONTACT * empty_contact();
+
+void saisir_contact(CONTACT * );
+
+RDV_HORAIRE * empty_horaire();
+
+void saisir_horaire(RDV_HORAIRE * );
+
+RDV_DUREE * empty_duree();
+
+void saisir_duree(RDV_DUREE * );
+
+RDV_OBJET * empty_objet();
+
+void saisir_objet(RDV_OBJET * );
+
+char* scanstring(void);
+
+void display_contact(CONTACT);
+
+void display_date(DATE);
+
+void display_horaire(RDV_HORAIRE);
+
+void display_duree(RDV_DUREE);
+
+void display_objet(RDV_OBJET);
 
 
 
