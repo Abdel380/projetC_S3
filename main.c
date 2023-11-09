@@ -16,10 +16,7 @@ int main() {
         present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
     stopTimer();
     displayTime();*/
-    RDV_OBJET * objet;
-    objet = empty_objet();
-    saisir_objet(objet); 
-    display_objet(*objet);
+
 
 
 

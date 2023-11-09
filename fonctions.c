@@ -133,7 +133,7 @@ void saisir_duree(RDV_DUREE * duree){
         printf("A quelle minute precise est votre rdv :"); // assignation pour les minutes
         scanf("%d", &(duree->minutes));
     }while ( duree->minutes < 0 || duree->heure > 59 );
-
+    printf("\n");
 }
 
 void display_duree(RDV_DUREE duree){
@@ -170,7 +170,7 @@ RDV_OBJET * empty_objet(){
 }
 
 void saisir_objet(RDV_OBJET * objet){
-    printf("Ecrivez la raison de votre rdv :");
+    printf("Ecrivez la raison de votre rdv : ");
     objet->contenu = scanstring();
 
     return;
@@ -190,4 +190,39 @@ void convert_maj_min(char*chaine){
         i++;
     }
     return;
+}
+
+RDV * empty_rdv(){
+    RDV * rdv = malloc(sizeof(RDV));
+
+    rdv->duree = empty_duree();
+    rdv->d = empty_date();
+    rdv->horaire = empty_horaire();
+    rdv->objet = empty_objet();
+
+    return rdv;
+}
+
+void saisir_rdv(RDV * rdv){
+
+    saisir_date(rdv->d);
+    saisir_objet(rdv->objet);
+    saisir_duree(rdv->duree);
+    saisir_horaire(rdv->horaire);
+
+    return;
+
+}
+
+
+void display_rdv(RDV rdv){
+
+    display_date(*rdv.d);
+
+    display_horaire(*rdv.horaire);
+
+    display_duree(*rdv.duree);
+
+    display_objet(*rdv.objet);
+
 }

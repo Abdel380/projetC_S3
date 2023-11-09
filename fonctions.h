@@ -34,15 +34,29 @@ typedef struct{
 }RDV_OBJET;
 
 typedef struct{
-    DATE  d;
-    RDV_HORAIRE  horaire;
-    RDV_DUREE duree;
-    RDV_OBJET objet;
+    DATE  * d;
+    RDV_HORAIRE  * horaire;
+    RDV_DUREE * duree;
+    RDV_OBJET * objet;
 }RDV;
+
+
+typedef struct sr_cell
+{
+    RDV* val;
+    struct sr_cell ** nexts; // tableau de pointeurs
+
+} r_cell, *pr_cell;
+
+
+typedef struct sr_list{
+    pr_cell head;
+
+}tr_std_list;
 
 typedef struct{
     CONTACT contact;
-    RDV *list_rdv;
+    tr_std_list *list_rdv;
 }AGENDA;
 
 CONTACT* empty_contact();
@@ -85,6 +99,11 @@ void convert_maj_min(char*chaine);
 
 
 
+RDV * empty_rdv();
+
+void saisir_rdv(RDV *);
+
+void display_rdv(RDV);
 
 
 #endif //PROJET_C_FONCTIONS_H
