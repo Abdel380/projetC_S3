@@ -40,6 +40,10 @@ typedef struct{
     RDV_OBJET objet;
 }RDV;
 
+typedef struct{
+    CONTACT contact;
+    RDV *list_rdv;
+}AGENDA;
 
 CONTACT* empty_contact();
 
@@ -77,7 +81,7 @@ void display_duree(RDV_DUREE);
 
 void display_objet(RDV_OBJET);
 
-
+void convert_maj_min(char*chaine);
 
 
 

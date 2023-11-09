@@ -14,13 +14,22 @@ CONTACT* empty_contact(){
 }
 
 void saisir_contact(CONTACT * contact){
+
     printf("Quelle est votre prenom :");
     contact->prenom = scanstring();
+    convert_maj_min(contact->prenom);
+
     printf("Quelle est votre nom :");
     contact->nom = scanstring();
+    convert_maj_min(contact->nom);
+
+    return;
 }
 
-
+void display_contact(CONTACT contact){
+    printf("%s_%s\n", contact.nom, contact.prenom);
+    return;
+}
 
 DATE* empty_date(){
     DATE * date = malloc(sizeof(DATE));
@@ -28,19 +37,23 @@ DATE* empty_date(){
 }
 
 void saisir_date(DATE * date){
-    date = empty_date(); // alloue la memoire
 
 
-    printf("En quelle annee est votre rdv :"); // assignation pour l'annee
+
+
     do{
+        printf("En quelle annee est votre rdv :"); // assignation pour l'annee
         scanf("%d", &(date->annee));
+
     }while ( date->annee < 2024 );
     printf("\n");
 
 
-    printf("En quelle mois est votre rdv :"); // assignation pour le mois
+
     do{
+        printf("En quelle mois est votre rdv :"); // assignation pour le mois
         scanf("%d", &(date->mois));
+
     }while ( date->mois < 0 || date->mois > 12 );
     printf("\n");
 
@@ -52,17 +65,21 @@ void saisir_date(DATE * date){
     else if ( date->mois == 2){
         max = 29;
     }
-    printf("Quelle jour est votre rdv :");
-    while ( date->jour < 0 || date->jour > max){
+
+    do{
+        printf("Quelle jour est votre rdv :");
         scanf("%d", &(date->jour));
-    }
+    }while ( date->jour < 0 || date->jour > max);
 
 
 
     return;
 }
 
-
+void display_date(DATE date){
+    printf("%d/%d/%d\n", date.jour, date.mois, date.annee);
+    return;
+}
 
 RDV_HORAIRE * empty_horaire(){
     RDV_HORAIRE * horaire = malloc(sizeof(RDV_HORAIRE));
@@ -70,19 +87,30 @@ RDV_HORAIRE * empty_horaire(){
 }
 
 void saisir_horaire(RDV_HORAIRE * horaire){
-    horaire = empty_horaire();
 
-    printf("A quelle heure est votre rdv :"); // assignation pour l'heure
+
     do{
+        printf("A quelle heure est votre rdv :"); // assignation pour l'heure
         scanf("%d", &(horaire->heure));
     }while ( horaire->heure < 0 || horaire->heure > 23 );
-    printf("\n");
 
-    printf("A quelle minute precise est votre rdv :"); // assignation pour les minutes
+
+
     do{
+        printf("A quelle minute precise est votre rdv :"); // assignation pour les minutes
         scanf("%d", &(horaire->minutes));
     }while ( horaire->minutes < 0 || horaire->heure > 59 );
-    printf("\n");
+
+}
+
+void display_horaire(RDV_HORAIRE horaire){
+    if ( horaire.minutes < 10){
+        printf("%d:0%d\n", horaire.heure, horaire.minutes);
+    }
+    else{
+        printf("%d:%d\n", horaire.heure, horaire.minutes);
+    }
+    return;
 }
 
 
@@ -92,21 +120,31 @@ RDV_DUREE * empty_duree(){
 }
 
 void saisir_duree(RDV_DUREE * duree){
-    duree = empty_duree();
 
-    printf("A quelle heure est votre rdv :"); // assignation pour l'heure
+
     do{
+        printf("A quelle heure est votre rdv :"); // assignation pour l'heure
         scanf("%d", &(duree->heure));
     }while ( duree->heure < 0 || duree->heure > 23 );
-    printf("\n");
 
-    printf("A quelle minute precise est votre rdv :"); // assignation pour les minutes
+
+
     do{
+        printf("A quelle minute precise est votre rdv :"); // assignation pour les minutes
         scanf("%d", &(duree->minutes));
     }while ( duree->minutes < 0 || duree->heure > 59 );
-    printf("\n");
+
 }
 
+void display_duree(RDV_DUREE duree){
+    if ( duree.minutes < 10){
+        printf("%d:0%d\n", duree.heure, duree.minutes);
+    }
+    else{
+        printf("%d:%d\n", duree.heure, duree.minutes);
+    }
+    return;
+}
 
 char* scanstring(void){
     char *chaine = malloc(sizeof(char)*30);
@@ -132,11 +170,24 @@ RDV_OBJET * empty_objet(){
 }
 
 void saisir_objet(RDV_OBJET * objet){
-    printf("Ecrivez la raison de votre rdv : ");
+    printf("Ecrivez la raison de votre rdv :");
     objet->contenu = scanstring();
+
+    return;
 }
 
+void display_objet(RDV_OBJET objet){
+    printf("%s\n", objet.contenu);
+    return;
+}
 
-void display_contact(CONTACT contact){
-    //printf("")
+void convert_maj_min(char*chaine){
+    int i=0;
+    while(chaine[i] !='\0') {
+        if ( chaine[i] >= 65 && chaine[i]<=90){
+            chaine[i]+=32;
+        }
+        i++;
+    }
+    return;
 }
