@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "list.h"
 #include "timer.h"
@@ -6,7 +5,6 @@
 #include "fonctions.h"
 
 int main() {
-
     /*int size = 10;
     int nb_recherche = 100000;
     int present;
@@ -16,6 +14,9 @@ int main() {
         present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
     stopTimer();
     displayTime();*/
+
+    char * name = scan_name();
+    printf("%s", name);
 
 
 

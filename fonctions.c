@@ -1,33 +1,57 @@
-//
-// Created by alex on 24/10/2023.
-//
-
 #include "fonctions.h"
 
 
-CONTACT* empty_contact(){
-    CONTACT * contact = malloc(sizeof(CONTACT));
+p_CONTACT empty_contact(){
+    p_CONTACT contact = malloc(sizeof(t_CONTACT));
     contact->nom = NULL;
-    contact->prenom = NULL;
-
+    p_RDV rdv = NULL;
+    contact->nexts = malloc(sizeof(t_CONTACT)*4);
+    for (int i=0; i<4; i++){
+        *(contact->nexts+i) = NULL;
+    }
     return contact;
 }
 
-void saisir_contact(CONTACT * contact){
+char * scan_name(){
+    printf("Entrez votre nom et prenom (format Prenom Nom):");
+    char * prenom_nom = scanstring();
+    int i=0,j=0;
+    char * prenom = malloc(sizeof(char)*20);
+    char * nom_prenom = malloc(sizeof(char)*40);
+    while (prenom_nom[i] != ' '){ // stocke le prenom
+        prenom[i] = prenom_nom[i];
+        i++;
+    }
+    i++;
 
-    printf("Quelle est votre prenom :");
-    contact->prenom = scanstring();
-    convert_maj_min(contact->prenom);
+    while (prenom_nom[i] != '\0'){ // mets le nom au debut
+        nom_prenom[j] = prenom_nom[i];
+        i++;
+        j++;
+    }
+    nom_prenom[j] = '_';
 
-    printf("Quelle est votre nom :");
-    contact->nom = scanstring();
-    convert_maj_min(contact->nom);
+    j++;
+    i=0;
+    while (prenom[i]!='\0'){ // rajoute le prenom a la fin
+        nom_prenom[j] = prenom[i];
+        j++;
+        i++;
+    }
+    convert_maj_min(nom_prenom);
+    return nom_prenom;
+}
+
+void saisir_contact(p_CONTACT contact){
+
+    contact->nom = scan_name();
+
 
     return;
 }
 
-void display_contact(CONTACT contact){
-    printf("%s_%s\n", contact.nom, contact.prenom);
+void display_contact(t_CONTACT contact){
+    printf("%s\n", contact.nom);
     return;
 }
 
@@ -37,9 +61,6 @@ DATE* empty_date(){
 }
 
 void saisir_date(DATE * date){
-
-
-
 
     do{
         printf("En quelle annee est votre rdv :"); // assignation pour l'annee
@@ -70,8 +91,6 @@ void saisir_date(DATE * date){
         printf("Quelle jour est votre rdv :");
         scanf("%d", &(date->jour));
     }while ( date->jour < 0 || date->jour > max);
-
-
 
     return;
 }
@@ -192,8 +211,8 @@ void convert_maj_min(char*chaine){
     return;
 }
 
-RDV * empty_rdv(){
-    RDV * rdv = malloc(sizeof(RDV));
+p_RDV empty_rdv(){
+    p_RDV rdv = malloc(sizeof(t_RDV));
 
     rdv->duree = empty_duree();
     rdv->d = empty_date();
@@ -203,7 +222,7 @@ RDV * empty_rdv(){
     return rdv;
 }
 
-void saisir_rdv(RDV * rdv){
+void saisir_rdv(p_RDV rdv){
 
     saisir_date(rdv->d);
     saisir_objet(rdv->objet);
@@ -215,7 +234,7 @@ void saisir_rdv(RDV * rdv){
 }
 
 
-void display_rdv(RDV rdv){
+void display_rdv(t_RDV rdv){
 
     display_date(*rdv.d);
 
@@ -224,5 +243,7 @@ void display_rdv(RDV rdv){
     display_duree(*rdv.duree);
 
     display_objet(*rdv.objet);
+
+    return;
 
 }
