@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Projet_c.dir/list.c.obj.d"
   "CMakeFiles/Projet_c.dir/main.c.obj"
   "CMakeFiles/Projet_c.dir/main.c.obj.d"
+  "CMakeFiles/Projet_c.dir/timer.c.obj"
+  "CMakeFiles/Projet_c.dir/timer.c.obj.d"
   "Projet_c.exe"
   "Projet_c.exe.manifest"
   "Projet_c.pdb"

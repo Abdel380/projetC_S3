@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/alex/CLionProjects/projetC_S32/fonctions.c" "CMakeFiles/Projet_c.dir/fonctions.c.obj" "gcc" "CMakeFiles/Projet_c.dir/fonctions.c.obj.d"
   "C:/Users/alex/CLionProjects/projetC_S32/list.c" "CMakeFiles/Projet_c.dir/list.c.obj" "gcc" "CMakeFiles/Projet_c.dir/list.c.obj.d"
   "C:/Users/alex/CLionProjects/projetC_S32/main.c" "CMakeFiles/Projet_c.dir/main.c.obj" "gcc" "CMakeFiles/Projet_c.dir/main.c.obj.d"
+  "C:/Users/alex/CLionProjects/projetC_S32/timer.c" "CMakeFiles/Projet_c.dir/timer.c.obj" "gcc" "CMakeFiles/Projet_c.dir/timer.c.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

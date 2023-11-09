@@ -97,6 +97,12 @@
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/main.c">
 			<Option target="Projet_c"/>
 		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/timer.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/timer.h">
+			<Option target="Projet_c"/>
+		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S32/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -9,4 +9,5 @@ add_executable(Projet_c main.c
         cell.c
         cell.h
         list.c
-        list.h)
+        list.h
+        timer.c)

@@ -224,6 +224,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/main.c.s
 .PHONY : main.c.s
 
+timer.obj: timer.c.obj
+.PHONY : timer.obj
+
+# target to build an object file
+timer.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/timer.c.obj
+.PHONY : timer.c.obj
+
+timer.i: timer.c.i
+.PHONY : timer.i
+
+# target to preprocess a source file
+timer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/timer.c.i
+.PHONY : timer.c.i
+
+timer.s: timer.c.s
+.PHONY : timer.s
+
+# target to generate assembly for a file
+timer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/timer.c.s
+.PHONY : timer.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -245,6 +269,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... timer.obj
+	@echo ... timer.i
+	@echo ... timer.s
 .PHONY : help
 
 

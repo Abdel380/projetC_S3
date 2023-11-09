@@ -24,17 +24,25 @@ int power(int a, int b){
 
 t_list create_list(int size){
     t_list list = create_empty_list(size);
-    int * tab = calloc(power(2, size), sizeof(int)); // On prend un tableau de power(2, size) valeur car on se passera de la première case mais on prendra une case en plus à la fin
+    int * tab = calloc((power(2, size)-1) ,sizeof(int)); // On prend un tableau de power(2, size) valeur car on se passera de la première case mais on prendra une case en plus à la fin
     int indice = 0;
-    for (int i=0; i<size; i++){
+
+    for(int i = 0;i<size;i++){
         indice = 0;
-        while (indice<(power(2, size))){
-            tab[indice] = i;
-            indice = indice + power(2, i);
+        while(indice< power(2,size)){
+            if(indice!=0) {
+                tab[indice-1] = i;
+            }
+            indice += power(2, i);
+
+
+
         }
     }
 
-
+    for(int i = 0;i< power(2,size)-1;i++){
+        printf("%d",tab[i]);
+    }
 
     if (size > 0){
         p_cell temp;
