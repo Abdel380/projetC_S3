@@ -1,11 +1,20 @@
 #include <stdio.h>
 #include "list.h"
-int main() {
-    int size = 3;
-    printf("____________________________\n");
-    t_list lst2 = create_list(size);
-    //display_list(lst2);
+#include "timer.h"
+#include "time.h"
 
-    //printf("%d", dichotomie_research_cell(lst2, lst2.heads[size-1], 5));
+int main() {
+
+    int size = 10;
+    int nb_recherche = 100000;
+    int present;
+    t_list lst2 = create_list(size);
+    startTimer();
+    for(int i = 0;i<nb_recherche;i++)
+        present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
+    stopTimer();
+    displayTime();
+
+
     return 0;
 }

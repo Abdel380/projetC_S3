@@ -40,14 +40,10 @@ t_list create_list(int size){
         }
     }
 
-    for(int i = 0;i< power(2,size)-1;i++){
-        printf("%d",tab[i]);
-    }
-
     if (size > 0){
         p_cell temp;
-        for (int i = 1; i<power(2, size); i++){
-            temp = createCell(i,tab[i]);
+        for (int i = 0; i<power(2, size)-1; i++){
+            temp = createCell(i+1,tab[i]);
             insert_cell(&list, temp);
         }
     }
@@ -164,18 +160,17 @@ int level_0_research_list(t_list list, int val){
 
 int dichotomie_research_cell(t_list lst, p_cell cell, int value){
     if(value == cell->value){
-        printf("bingo\n");
         return 1;
     }
     else if ((cell->value < value) && (cell->level > 0)){
         for (int i=0; i<lst.max_level; i++){
-            lst.heads[i] = cell->nexts[i];
+            p_cell temp = lst.heads[i];
+            temp = cell->nexts[i];
         }
         return dichotomie_research_cell(lst, cell->nexts[cell->level - 1], value) != 0;
     }
 
     {
-        printf("gauche\n");
         return dichotomie_research_cell(lst,lst.heads[cell->level - 1], value) != 0;
     }
 }
