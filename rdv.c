@@ -63,33 +63,9 @@ DATE empty_date(){
 DATE create_date(){
     DATE date = empty_date();
     do{
-        printf("En quelle annee est votre rdv :"); // assignation pour l'annee
-        scanf("%d", &(date.annee));
-
-    }while ( date.annee < 2024 );
-
-    do{
-        printf("Quel mois est votre rdv : "); // assignation pour le mois
-        scanf("%d", &(date.mois));
-    }while ( date.mois < 0 || date.mois > 12 );
-
-
-    int max;
-    if ( date.mois == 1 || date.mois == 3 || date.mois == 5 || date.mois == 7 || date.mois == 8 || date.mois == 10 || date.mois == 12){
-        max = 31;
-    }
-    else if ( date.mois == 2){
-        max = 29;
-    }
-    else{
-        max = 30;
-    }
-
-    do{
-        printf("Quel est le jour de votre rendez vous: ");
-        scanf("%d", &(date.jour));
-    }while ( date.jour < 0 || date.jour > max);
-
+        printf("Quelle est la date de votre rendez vous (format jj/mm/aaaa)"); // assignation pour l'annee
+        scanf("%d/%d/%d", &(date.jour), &(date.mois), &(date.annee));
+    }while (date.annee < 2024 || ( date.mois < 0 || date.mois > 12 ) || (date.jour < 0) || ((date.mois == 1 || date.mois == 3 || date.mois == 5 || date.mois == 7 || date.mois == 8 || date.mois == 10 || date.mois == 12) && (date.jour > 31)) || ((date.mois == 4 || date.mois == 6 || date.mois == 9 || date.mois == 11) && (date.jour > 30)) || ((date.mois == 2) && (date.jour > 28)));
     return date;
 }
 

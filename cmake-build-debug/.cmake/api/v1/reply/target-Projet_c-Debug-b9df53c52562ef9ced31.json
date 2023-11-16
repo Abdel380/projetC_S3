@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Projet_c.exe"
-		},
-		{
-			"path" : "Projet_c.pdb"
+			"path" : "Projet_c"
 		}
 	],
 	"backtrace" : 1,
@@ -38,7 +35,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu11 -fdiagnostics-color=always"
+					"fragment" : "-g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics"
 				}
 			],
 			"language" : "C",
@@ -73,16 +70,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "C"
 	},
 	"name" : "Projet_c",
-	"nameOnDisk" : "Projet_c.exe",
+	"nameOnDisk" : "Projet_c",
 	"paths" : 
 	{
 		"build" : ".",

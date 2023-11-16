@@ -14,15 +14,15 @@ int main() {
         present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
     stopTimer();
     displayTime();*/
-    p_CONTACT contact = create_contact();
-    display_contact(*contact);
+    //p_CONTACT contact = create_contact();
+    //display_contact(*contact);
 
-    //p_RDV = create_rdv();
+    p_RDV rdv = create_rdv();
+    display_rdv(rdv);
     //RDV_OBJET objet = create_objet();
     //display_objet(objet);
-    //p_RDV rdv = create_rdv();
-    //display_rdv(rdv);
-
+    //DATE rdv = create_date();
+    //display_date(rdv);
 
 
 
