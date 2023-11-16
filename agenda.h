@@ -4,11 +4,17 @@
 #include "rdv.h"
 
 typedef struct {
-    t_CONTACT ** contact_head;
+    t_CONTACT ** contact_heads;
 }AGENDA;
 
 AGENDA empty_agenda();
 
-void insert_contact(AGENDA* agenda);
+void insert_contact(AGENDA* agenda,p_CONTACT contact);
+
+void display_agenda_by_level(AGENDA agenda, int level);
+
+void display_agenda(AGENDA agenda);
+
+int dichotomie_research_contact(AGENDA agenda, p_CONTACT contact, char * nom);
 
 #endif //PROJET_C_AGENDA_H

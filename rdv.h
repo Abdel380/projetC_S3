@@ -38,6 +38,7 @@ typedef struct s_RDV
 typedef struct s_CONTACT
 {
     char * nom;
+    int level;
     p_RDV rdv_head; // tete de la liste
     struct s_CONTACT ** nexts ; // tableau de pointeur
 } t_CONTACT, *p_CONTACT;

@@ -14,15 +14,30 @@ int main() {
         present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
     stopTimer();
     displayTime();*/
-    //p_CONTACT contact = create_contact();
-    //display_contact(*contact);
 
-    p_RDV rdv = create_rdv();
-    display_rdv(rdv);
-    //RDV_OBJET objet = create_objet();
-    //display_objet(objet);
-    //DATE rdv = create_date();
-    //display_date(rdv);
+    // CREATION DE 3 CONTACT
+    p_CONTACT contact1 = create_contact();
+    p_CONTACT contact2 = create_contact();
+    p_CONTACT contact3 = create_contact();
+    contact1->nexts[0] = contact2;
+    contact2->nexts[0] = contact3;
+
+    AGENDA  agenda =empty_agenda();
+    insert_contact(&agenda, contact1);
+    insert_contact(&agenda, contact2);
+    insert_contact(&agenda, contact3);
+
+    p_CONTACT contactADD = create_contact();
+    insert_contact(&agenda, contactADD);
+
+
+
+    // AFFICHAGE DES NOMS ET DES NIVEAUX
+
+
+    display_agenda(agenda);
+
+    //printf("%d", dichotomie_research_contact(agenda,, ""))
 
 
 

@@ -8,6 +8,7 @@ p_CONTACT empty_contact(){
     p_CONTACT contact = malloc(sizeof(t_CONTACT));
     contact->nom = NULL;
     contact->rdv_head = NULL;
+    contact -> level = 0;
     contact->nexts = malloc(sizeof(t_CONTACT)*4);
     for (int i=0; i<4; i++){
         *(contact->nexts+i) = NULL;
@@ -45,9 +46,9 @@ char * scan_name() {
 p_CONTACT create_contact(){
     p_CONTACT contact = empty_contact();
     contact->nom = scan_name();
-    contact->rdv_head = create_rdv();
     return contact;
 }
+
 
 void display_contact(t_CONTACT contact){
     printf("%s\n", contact.nom);
@@ -65,7 +66,7 @@ DATE create_date(){
     do{
         printf("Quelle est la date de votre rendez vous (format jj/mm/aaaa)"); // assignation pour l'annee
         scanf("%d/%d/%d", &(date.jour), &(date.mois), &(date.annee));
-    }while (date.annee < 2024 || ( date.mois < 0 || date.mois > 12 ) || (date.jour < 0) || ((date.mois == 1 || date.mois == 3 || date.mois == 5 || date.mois == 7 || date.mois == 8 || date.mois == 10 || date.mois == 12) && (date.jour > 31)) || ((date.mois == 4 || date.mois == 6 || date.mois == 9 || date.mois == 11) && (date.jour > 30)) || ((date.mois == 2) && (date.jour > 28)));
+    }while (date.annee < 2024 || ( date.mois <= 0 || date.mois > 12 ) || (date.jour <= 0) || ((date.mois == 1 || date.mois == 3 || date.mois == 5 || date.mois == 7 || date.mois == 8 || date.mois == 10 || date.mois == 12) && (date.jour > 31)) || ((date.mois == 4 || date.mois == 6 || date.mois == 9 || date.mois == 11) && (date.jour > 30)) || ((date.mois == 2) && (date.jour > 28)));
     return date;
 }
 
@@ -79,7 +80,7 @@ RDV_HORAIRE empty_horaire(){
     return *horaire;
 }
 
-RDV_HORAIRE  create_horaire(){
+RDV_HORAIRE create_horaire(){
 
     RDV_HORAIRE horaire = empty_horaire();
     do{
