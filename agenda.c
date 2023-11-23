@@ -16,6 +16,8 @@ AGENDA empty_agenda(){
 void insert_contact(AGENDA* agenda,p_CONTACT contact){
     p_CONTACT temp = agenda->contact_heads[0];
     p_CONTACT prev = temp;
+
+
     if (temp == NULL){
         for (int i=0; i<4; i++)
             insert_by_level(agenda, contact, i, temp, 0);
@@ -35,7 +37,6 @@ void insert_contact(AGENDA* agenda,p_CONTACT contact){
             level_next = 0;
         }
 
-        printf("%d", contact->nexts[level_next]->level);
 
         for (int i=0; i<4; i++)
             insert_by_level(agenda, contact, i, temp, level_next);
@@ -96,7 +97,7 @@ void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp,
         return;
     }
 
-    if ( agenda->contact_heads[level]->nexts[level] == NULL && strcmp(contact->nom,next->nom) > 0){ // si une seule cellule et on doit inserer à droite
+    if ( agenda->contact_heads[level]->nexts[level] == NULL && strcmp(contact->nom,next->nom) > 0){ // si une seule cellule et on doit inserer Ã  droite
         agenda->contact_heads[level]->nexts[level] = contact;
         return;
     }
@@ -110,6 +111,7 @@ void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp,
         else{
             contact->nexts[level] = temp->nexts[level];
         }
+
         return;
     }
 
@@ -123,47 +125,28 @@ void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp,
         contact->nexts[level] = NULL;
         return;
     }
-    else{
+    else if( next->nexts[level] == NULL && strcmp(contact->nom,next->nom) < 0){
         prev->nexts[level] = contact;
-        contact->nexts[level] = next;
+        if (level>level_next)
+            contact->nexts[level] = NULL;
+        else
+
+            contact->nexts[level] = next;
         return;
     }
 
-
+    // chainage pour les nexts
     if (level <= level_next){
         contact->nexts[level] = temp;
-
+        printf("cacao");
     }
     else{
-        contact->nexts[level] = temp->nexts[level];
-    }
-    if (temp->nom[level] != contact->nom[level]){
-        for(int i=3; i>=0; i--){
-            contact->nexts[level] = temp->nexts[level];
-            temp->nexts[level] = NULL;
-
-        }
-        temp->level = 3;
-    }
-    else if (temp->nom[0] == contact->nom[0] && temp->nom[1] != contact->nom[1]){
-        for (int i=2; i>=0; i--){
-            contact->nexts[level] = temp->nexts[level];
-            temp->nexts[level] = NULL;
-        }
-        temp->level = 2;
-    }
-    else if (temp->nom[0] == contact->nom[0] && temp->nom[1] == contact->nom[1] && temp->nom[2] != contact->nom[2]){
-        for (int i=1; i>=0; i--){
-            contact->nexts[level] = temp->nexts[level];
-            temp->nexts[level] = NULL;
-        }
-        temp->level = 1;
-    }
-    else{
-        contact->nexts[level] = temp->nexts[level];
+        printf("AAAaaaaaaaAAAAAAAAAAAAAAAAAAA");
+        contact->nexts[level] = temp->nexts[level]->nexts[level];
         temp->nexts[level] = NULL;
-        temp->level = 0;
+        temp->level = level_next;
     }
+
 
 }
 
@@ -192,27 +175,48 @@ void display_agenda(AGENDA agenda){
 }
 
 
-/*int research_contact(AGENDA agenda, char * nom, int level, int indice){
+int research_contact(AGENDA agenda, char * nom, int level, int indice) {
     if (agenda.contact_heads[level] == NULL)
         return 0;
-    else if (agenda.contact_heads[level]->nom[indice] > nom[indice])
+    else if (strcmp(agenda.contact_heads[level]->nom, nom) > 0)
         return 0;
-    if ( nom == agenda.contact_heads[level]->nom){
+    if (nom == agenda.contact_heads[level]->nom) {
         return 1;
     }
-    if (level == 3 && nom[0] != agenda.contact_heads[3]->nom[0]){
-        for (int i=0; i<=3; i++)
+
+    if (level == 3 && nom[0] != agenda.contact_heads[3]->nom[0]) {
+        for (int i = 0; i <= 3; i++)
             agenda.contact_heads[i] = agenda.contact_heads[3]->nexts[3];
         return research_contact(agenda, nom, level, 0);
     } else if (level == 3 && nom[0] == agenda.contact_heads[3]->nom[0])
-        return research_contact(agenda, nom, level-1, 1);
+        return research_contact(agenda, nom, level - 1, 1);
 
-    if (level == 2 && nom[1] != agenda.contact_heads[2]->nom[0]){
-        for (int i=0; i<=2; i++)
+
+    if (level == 2 && nom[1] != agenda.contact_heads[2]->nom[1]) {
+        for (int i = 0; i <= 2; i++)
             agenda.contact_heads[i] = agenda.contact_heads[2]->nexts[2];
         return research_contact(agenda, nom, level, 1);
     } else if (level == 2 && nom[1] == agenda.contact_heads[2]->nom[1])
-        return research_contact(agenda, nom, level-1, 2);
+        return research_contact(agenda, nom, level - 1, 2);
 
 
-}*/
+    if (level == 1 && nom[2] != agenda.contact_heads[1]->nom[2]) {
+        for (int i = 0; i <= 1; i++){
+            agenda.contact_heads[i] = agenda.contact_heads[1]->nexts[1];
+        }
+        return research_contact(agenda, nom, level, 2);
+    } else if (level == 1 && nom[2] == agenda.contact_heads[2]->nom[2])
+        return research_contact(agenda, nom, level - 1, 2);
+
+
+    if (level == 0 && strcmp(agenda.contact_heads[level]->nom, nom) < 0) {
+        agenda.contact_heads[0] = agenda.contact_heads[0]->nexts[0];
+        return research_contact(agenda, nom, level, 3);
+    }
+}
+
+
+void delete_contact(AGENDA agenda, char * nom){
+
+
+}
