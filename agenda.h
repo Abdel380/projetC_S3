@@ -10,6 +10,7 @@ typedef struct {
 AGENDA empty_agenda();
 
 void insert_contact(AGENDA* agenda,p_CONTACT contact);
+void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp, int level_next);
 
 void display_agenda_by_level(AGENDA agenda, int level);
 

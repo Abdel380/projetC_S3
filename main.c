@@ -16,30 +16,22 @@ int main() {
     displayTime();*/
 
     // CREATION DE 3 CONTACT
-    p_CONTACT contact1 = create_contact();
-    p_CONTACT contact2 = create_contact();
-    p_CONTACT contact3 = create_contact();
-    contact1->nexts[0] = contact2;
-    contact2->nexts[0] = contact3;
-
     AGENDA  agenda =empty_agenda();
+    p_CONTACT contact1 = create_contact();
     insert_contact(&agenda, contact1);
-    insert_contact(&agenda, contact2);
-    insert_contact(&agenda, contact3);
 
-    p_CONTACT contactADD = create_contact();
-    insert_contact(&agenda, contactADD);
+
+    p_CONTACT contact2 = create_contact();
+    insert_contact(&agenda, contact2);
+
+    p_CONTACT contact3 = create_contact();
+    insert_contact(&agenda, contact3);
 
 
 
     // AFFICHAGE DES NOMS ET DES NIVEAUX
 
-
     display_agenda(agenda);
-
-    //printf("%d", dichotomie_research_contact(agenda,, ""))
-
-
 
     return 0;
 }
