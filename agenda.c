@@ -175,43 +175,39 @@ void display_agenda(AGENDA agenda){
 }
 
 
-int research_contact(AGENDA agenda, char * nom, int level, int indice) {
-    if (agenda.contact_heads[level] == NULL)
+int research_contact(p_CONTACT head, char * nom, int level) {
+    if (head == NULL)
         return 0;
-    else if (strcmp(agenda.contact_heads[level]->nom, nom) > 0)
+    else if (strcmp(head->nom, nom) > 0)
         return 0;
-    if (nom == agenda.contact_heads[level]->nom) {
+    if (nom == head->nom) {
         return 1;
     }
 
-    if (level == 3 && nom[0] != agenda.contact_heads[3]->nom[0]) {
-        for (int i = 0; i <= 3; i++)
-            agenda.contact_heads[i] = agenda.contact_heads[3]->nexts[3];
-        return research_contact(agenda, nom, level, 0);
-    } else if (level == 3 && nom[0] == agenda.contact_heads[3]->nom[0])
-        return research_contact(agenda, nom, level - 1, 1);
+    if (level == 3 && nom[0] < head->nom[0]) {
+        head = head->nexts[3];
+        return research_contact(head, nom, level);
+    } else if (level == 3 && nom[0] == head->nom[0])
+        return research_contact(head, nom, level - 1);
 
 
-    if (level == 2 && nom[1] != agenda.contact_heads[2]->nom[1]) {
-        for (int i = 0; i <= 2; i++)
-            agenda.contact_heads[i] = agenda.contact_heads[2]->nexts[2];
-        return research_contact(agenda, nom, level, 1);
-    } else if (level == 2 && nom[1] == agenda.contact_heads[2]->nom[1])
-        return research_contact(agenda, nom, level - 1, 2);
+    if (level == 2 && nom[1] != head->nom[1]) {
+        head = head->nexts[2];
+        return research_contact(head, nom, level);
+    } else if (level == 2 && nom[1] == head->nom[1])
+        return research_contact(head, nom, level - 1);
 
 
-    if (level == 1 && nom[2] != agenda.contact_heads[1]->nom[2]) {
-        for (int i = 0; i <= 1; i++){
-            agenda.contact_heads[i] = agenda.contact_heads[1]->nexts[1];
-        }
-        return research_contact(agenda, nom, level, 2);
-    } else if (level == 1 && nom[2] == agenda.contact_heads[2]->nom[2])
-        return research_contact(agenda, nom, level - 1, 2);
+    if (level == 1 && nom[2] != head->nom[2]) {
+        head = head->nexts[1];
+        return research_contact(head, nom, level);
+    } else if (level == 1 && nom[2] == head->nom[2])
+        return research_contact(head, nom, level - 1);
 
 
-    if (level == 0 && strcmp(agenda.contact_heads[level]->nom, nom) < 0) {
-        agenda.contact_heads[0] = agenda.contact_heads[0]->nexts[0];
-        return research_contact(agenda, nom, level, 3);
+    if (level == 0 && strcmp(head->nom, nom) < 0) {
+        head = head->nexts[0];
+        return research_contact(head, nom, level);
     }
 }
 

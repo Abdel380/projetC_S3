@@ -15,7 +15,6 @@ void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp,
 void display_agenda_by_level(AGENDA agenda, int level);
 
 void display_agenda(AGENDA agenda);
-
-int dichotomie_research_contact(AGENDA agenda, p_CONTACT contact, char * nom);
+int research_contact(p_CONTACT head, char * nom, int level);
 
 #endif //PROJET_C_AGENDA_H
