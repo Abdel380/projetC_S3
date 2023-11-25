@@ -16,7 +16,7 @@ int main() {
     displayTime();*/
 
     // CREATION DE 3 CONTACT
-    AGENDA  agenda =empty_agenda();
+    /*AGENDA  agenda =empty_agenda();
     p_CONTACT contact1 = create_contact();
     insert_contact(&agenda, contact1);
 
@@ -26,12 +26,20 @@ int main() {
 
     p_CONTACT contact3 = create_contact();
     insert_contact(&agenda, contact3);
+    */
 
 
 
     // AFFICHAGE DES NOMS ET DES NIVEAUX
 
-    display_agenda(agenda);
+    //display_agenda(agenda);
+
+    p_CONTACT contact1 = create_contact();
+    contact1->rdv_head = create_rdv();
+    contact1->rdv_head->next = create_rdv();
+    contact1->rdv_head->next->next = create_rdv();
+    display_Contact_rdv(*contact1);
+
 
     return 0;
 }

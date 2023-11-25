@@ -212,3 +212,9 @@ void display_rdv(p_RDV rdv){
     display_objet(rdv->objet);
     return;
 }
+void display_Contact_rdv(t_CONTACT contact){
+    while(contact.rdv_head!=NULL){
+        display_rdv(contact.rdv_head);
+        contact.rdv_head = contact.rdv_head->next;
+    }
+}

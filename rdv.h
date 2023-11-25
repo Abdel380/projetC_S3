@@ -66,6 +66,7 @@ void display_horaire(RDV_HORAIRE);
 void display_duree(RDV_DUREE);
 void display_objet(RDV_OBJET);
 void convert_maj_min(char * chaine);
+void display_Contact_rdv(t_CONTACT contact);
 
 
 p_RDV empty_rdv();
