@@ -45,7 +45,10 @@ typedef struct s_CONTACT
 
 p_CONTACT empty_contact();
 char* scan_name();
-
+void cleanInputBuffer();
+char* scanstring();
+int compareDate(DATE date1, DATE date2);
+int compareTime(RDV_HORAIRE time1, RDV_HORAIRE time2);
 
 DATE empty_date();
 DATE create_date();
@@ -57,9 +60,9 @@ RDV_DUREE empty_duree();
 RDV_DUREE create_duree();
 RDV_OBJET empty_objet();
 RDV_OBJET create_objet();
+void Insert_rdv(p_RDV rdv,p_CONTACT contact);
 
 
-char* scanstring();
 void display_contact(t_CONTACT);
 void display_date(DATE);
 void display_horaire(RDV_HORAIRE);
@@ -67,6 +70,8 @@ void display_duree(RDV_DUREE);
 void display_objet(RDV_OBJET);
 void convert_maj_min(char * chaine);
 void display_Contact_rdv(t_CONTACT contact);
+
+
 
 
 p_RDV empty_rdv();

@@ -33,11 +33,9 @@ int main() {
     // AFFICHAGE DES NOMS ET DES NIVEAUX
 
     //display_agenda(agenda);
-
     p_CONTACT contact1 = create_contact();
-    contact1->rdv_head = create_rdv();
-    contact1->rdv_head->next = create_rdv();
-    contact1->rdv_head->next->next = create_rdv();
+    p_RDV rdv = create_rdv();
+    Insert_rdv(rdv,contact1);
     display_Contact_rdv(*contact1);
 
 

@@ -4,16 +4,15 @@
 #include <ctype.h>
 
 
-p_CONTACT empty_contact(){
-    p_CONTACT contact = malloc(sizeof(t_CONTACT));
-    contact->nom = NULL;
-    contact->rdv_head = NULL;
-    contact -> level = 0;
-    contact->nexts = malloc(sizeof(t_CONTACT)*4);
-    for (int i=0; i<4; i++){
-        *(contact->nexts+i) = NULL;
-    }
-    return contact;
+void cleanInputBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+char* scanstring() {
+    char *chaine = malloc(sizeof(char)*100);
+    fgets(chaine, 100, stdin);
+    return chaine;
 }
 
 char * scan_name() {
@@ -43,6 +42,62 @@ char * scan_name() {
     return nom_prenom;
 }
 
+void convert_maj_min(char*chaine){
+    int i=0;
+    while(chaine[i] !='\0') {
+        if ( chaine[i] >= 65 && chaine[i]<=90){
+            chaine[i]+=32;
+        }
+        i++;
+    }
+    return;
+}
+
+int compareDate(DATE date1, DATE date2){
+    if(date1.annee>date2.annee){
+        return 1;
+    }
+    else if(date1.annee == date2.annee ){
+        if(date1.mois >date2.mois){
+            return 1;
+        }
+        else if(date1.mois == date2.mois){
+            if(date1.jour>date2.jour){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int compareTime(RDV_HORAIRE time1,RDV_HORAIRE time2){
+    if(time1.heure>time2.heure){
+        return 1;
+    }
+    else if(time1.heure == time2.heure){
+        if(time1.minutes>time2.minutes){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+//Fonctions pours les contacts
+
+
+p_CONTACT empty_contact(){
+    p_CONTACT contact = malloc(sizeof(t_CONTACT));
+    contact->nom = NULL;
+    contact->rdv_head = NULL;
+    contact -> level = 0;
+    contact->nexts = malloc(sizeof(t_CONTACT)*4);
+    for (int i=0; i<4; i++){
+        *(contact->nexts+i) = NULL;
+    }
+    return contact;
+}
+
 p_CONTACT create_contact(){
     p_CONTACT contact = empty_contact();
     contact->nom = scan_name();
@@ -56,9 +111,43 @@ void display_contact(t_CONTACT contact){
 }
 
 /* FONCTION DATE */
+
+
+
+
+RDV_DUREE  empty_duree(){
+    RDV_DUREE * duree = malloc(sizeof(RDV_DUREE));
+    return *duree;
+}
+
+
+
+RDV_OBJET empty_objet(){
+    RDV_OBJET * objet = malloc(sizeof(RDV_OBJET));
+    objet->contenu = malloc(sizeof(char)*100);
+
+    return *objet;
+}
+
 DATE empty_date(){
     DATE * date = malloc(sizeof(DATE));
     return *date;
+}
+RDV_HORAIRE empty_horaire(){
+    RDV_HORAIRE * horaire = malloc(sizeof(RDV_HORAIRE));
+    return *horaire;
+}
+
+p_RDV empty_rdv(){
+    p_RDV rdv = malloc(sizeof(t_RDV));
+
+    rdv->duree = empty_duree();
+    rdv->d = empty_date();
+    rdv->horaire = empty_horaire();
+    rdv->objet = empty_objet();
+
+
+    return rdv;
 }
 
 DATE create_date(){
@@ -70,14 +159,15 @@ DATE create_date(){
     return date;
 }
 
-void display_date(DATE date){
-    printf("%d/%d/%d", date.jour, date.mois, date.annee);
-    return;
-}
 
-RDV_HORAIRE empty_horaire(){
-    RDV_HORAIRE * horaire = malloc(sizeof(RDV_HORAIRE));
-    return *horaire;
+RDV_OBJET create_objet(){
+    RDV_OBJET objet = empty_objet();
+
+    printf("Ecrivez la raison de votre rdv :");
+    char* phrase = malloc(sizeof(char) * 100);
+    objet.contenu = scanstring();
+
+    return objet;
 }
 
 RDV_HORAIRE create_horaire(){
@@ -93,22 +183,6 @@ RDV_HORAIRE create_horaire(){
 
 }
 
-void display_horaire(RDV_HORAIRE horaire){
-    if ( horaire.minutes < 10){
-        printf("%d:0%d", horaire.heure, horaire.minutes);
-    }
-    else{
-        printf("%d:%d", horaire.heure, horaire.minutes);
-    }
-    return;
-}
-
-
-RDV_DUREE  empty_duree(){
-    RDV_DUREE * duree = malloc(sizeof(RDV_DUREE));
-    return *duree;
-}
-
 RDV_DUREE  create_duree(){
 
     RDV_DUREE  duree = empty_duree();
@@ -122,85 +196,46 @@ RDV_DUREE  create_duree(){
     return duree;
 }
 
-void display_duree(RDV_DUREE duree){
-    if ( duree.minutes < 10){
-        printf("%dh0%d", duree.heure, duree.minutes);
-    }
-    else{
-        printf("%dh%d", duree.heure, duree.minutes);
-    }
-    return;
-}
-
-char* scanstring() {
-    char *chaine = malloc(sizeof(char)*100);
-    fgets(chaine, 100, stdin);
-    size_t length = strcspn(chaine, "\n");
-    if (chaine[length] == '\n') {
-        chaine[length] = '\0';
-    }
-    return chaine;
-}
-
-
-
-RDV_OBJET empty_objet(){
-    RDV_OBJET * objet = malloc(sizeof(RDV_OBJET));
-    objet->contenu = malloc(sizeof(char)*100);
-
-    return *objet;
-}
-
-RDV_OBJET create_objet(){
-    RDV_OBJET objet = empty_objet();
-
-    printf("Ecrivez la raison de votre rdv :");
-    char* phrase = malloc(sizeof(char) * 100);
-    objet.contenu = scanstring();
-
-    return objet;
-}
-
-
-
-void display_objet(RDV_OBJET objet){
-    printf("%s", objet.contenu);
-    return;
-}
-
-void convert_maj_min(char*chaine){
-    int i=0;
-    while(chaine[i] !='\0') {
-        if ( chaine[i] >= 65 && chaine[i]<=90){
-            chaine[i]+=32;
-        }
-        i++;
-    }
-    return;
-}
-
-p_RDV empty_rdv(){
-    p_RDV rdv = malloc(sizeof(t_RDV)*50);
-
-    rdv->duree = empty_duree();
-    rdv->d = empty_date();
-    rdv->horaire = empty_horaire();
-    rdv->objet = empty_objet();
-
-
-    return rdv;
-}
 
 p_RDV create_rdv(){
     p_RDV rdv = empty_rdv();
+
+
     rdv->objet = create_objet();
     rdv->d = create_date();
-    rdv->duree = create_duree();
     rdv->horaire = create_horaire();
+    rdv->duree = create_duree();
+    cleanInputBuffer();
+
 
     return rdv;
 
 }
+
+
+
+void Insert_rdv(p_RDV rdv,p_CONTACT contact){
+    if(contact->rdv_head == NULL){
+        contact->rdv_head = rdv;
+    }
+    else{
+        p_RDV temp = contact->rdv_head;
+        while(compareDate(rdv->d,temp->d)>0 && temp!=NULL){
+            temp = temp->next;
+        }
+        while(compareTime(rdv->horaire,temp->horaire)>0 && temp!=NULL){
+            temp = temp->next;
+        }
+        if(temp == NULL){
+            temp =rdv;
+            temp->next = NULL;
+            temp = temp->next;
+            free(temp);
+        }
+    }
+}
+
+
 
 void display_rdv(p_RDV rdv){
     display_date(rdv->d);
@@ -217,4 +252,36 @@ void display_Contact_rdv(t_CONTACT contact){
         display_rdv(contact.rdv_head);
         contact.rdv_head = contact.rdv_head->next;
     }
+}
+
+
+void display_objet(RDV_OBJET objet){
+    printf("%s", objet.contenu);
+    return;
+}
+
+void display_duree(RDV_DUREE duree){
+    if ( duree.minutes < 10){
+        printf("%dh0%d", duree.heure, duree.minutes);
+    }
+    else{
+        printf("%dh%d", duree.heure, duree.minutes);
+    }
+    return;
+}
+
+
+void display_horaire(RDV_HORAIRE horaire){
+    if ( horaire.minutes < 10){
+        printf("%d:0%d", horaire.heure, horaire.minutes);
+    }
+    else{
+        printf("%d:%d", horaire.heure, horaire.minutes);
+    }
+    return;
+}
+
+void display_date(DATE date){
+    printf("%d/%d/%d", date.jour, date.mois, date.annee);
+    return;
 }
