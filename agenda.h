@@ -15,6 +15,8 @@ void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp,
 void display_agenda_by_level(AGENDA agenda, int level);
 
 void display_agenda(AGENDA agenda);
-int research_contact(p_CONTACT head, char * nom, int level);
+p_CONTACT research_contact(p_CONTACT head, char * nom, int level);
+
+void create_rdv_for_contact(p_RDV rdv, AGENDA* agenda);
 
 #endif //PROJET_C_AGENDA_H

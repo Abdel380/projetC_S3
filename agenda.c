@@ -175,13 +175,13 @@ void display_agenda(AGENDA agenda){
 }
 
 
-int research_contact(p_CONTACT head, char * nom, int level) {
+p_CONTACT research_contact(p_CONTACT head, char * nom, int level) {
     if (head == NULL)
-        return 0;
+        return NULL;
     else if (strcmp(head->nom, nom) > 0)
-        return 0;
+        return NULL;
     if (nom == head->nom) {
-        return 1;
+        return head;
     }
 
     if (level == 3 && nom[0] < head->nom[0]) {
@@ -212,7 +212,27 @@ int research_contact(p_CONTACT head, char * nom, int level) {
 }
 
 
-void delete_contact(AGENDA agenda, char * nom){
+void create_rdv_for_contact(p_RDV rdv, AGENDA* agenda) {
+    char* nom = scan_name();
 
 
+    // Recherche du contact dans l'agenda
+    p_CONTACT tmp = research_contact(agenda->contact_heads[3], nom, 3);
+    display_agenda(*agenda);
+
+
+    if (tmp == NULL) {
+        // Si le contact n'existe pas, créer un nouveau contact
+        p_CONTACT contact = empty_contact();
+        contact->nom =  nom;
+        Insert_rdv(rdv,contact);
+
+        // Insérer le nouveau contact dans l'agenda
+        //insert_contact(agenda, contact);
+    } else {
+        // Si le contact existe, insérer le rendez-vous
+        Insert_rdv(rdv, tmp);
+    }
+
+    
 }

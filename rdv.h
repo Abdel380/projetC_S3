@@ -61,6 +61,8 @@ RDV_DUREE create_duree();
 RDV_OBJET empty_objet();
 RDV_OBJET create_objet();
 void Insert_rdv(p_RDV rdv,p_CONTACT contact);
+int number_rdv(t_CONTACT contact);
+
 
 
 void display_contact(t_CONTACT);
