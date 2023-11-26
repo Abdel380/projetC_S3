@@ -176,10 +176,12 @@ void display_agenda(AGENDA agenda){
 
 
 p_CONTACT research_contact(p_CONTACT head, char * nom, int level) {
-    if (head == NULL)
+    if (head == NULL){
         return NULL;
-    else if (strcmp(head->nom, nom) > 0)
+        }
+    if (strcmp(head->nom, nom) > 0)
         return NULL;
+
     if (nom == head->nom) {
         return head;
     }
@@ -209,6 +211,7 @@ p_CONTACT research_contact(p_CONTACT head, char * nom, int level) {
         head = head->nexts[0];
         return research_contact(head, nom, level);
     }
+
 }
 
 
@@ -218,21 +221,26 @@ void create_rdv_for_contact(p_RDV rdv, AGENDA* agenda) {
 
     // Recherche du contact dans l'agenda
     p_CONTACT tmp = research_contact(agenda->contact_heads[3], nom, 3);
-    display_agenda(*agenda);
+
 
 
     if (tmp == NULL) {
         // Si le contact n'existe pas, créer un nouveau contact
+
         p_CONTACT contact = empty_contact();
         contact->nom =  nom;
+
+        insert_contact(agenda, contact);
+        printf("toto");
         Insert_rdv(rdv,contact);
 
         // Insérer le nouveau contact dans l'agenda
-        //insert_contact(agenda, contact);
+
     } else {
         // Si le contact existe, insérer le rendez-vous
         Insert_rdv(rdv, tmp);
+        printf("popo");
     }
 
-    
+
 }
