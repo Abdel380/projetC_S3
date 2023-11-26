@@ -71,7 +71,7 @@ int main() {
     if(inconnu == NULL){
         printf("pp");
     }else {
-        printf("brrrr");
+        printf("%s",inconnu->nom);
     }
 
 

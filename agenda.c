@@ -177,16 +177,14 @@ void display_agenda(AGENDA agenda){
 
 p_CONTACT research_contact(p_CONTACT head, char * nom, int level) {
     if (head == NULL){
-        printf("pas bon1");
         return NULL;
         }
     if (strcmp(head->nom, nom) > 0) {
-        printf("pas bon2");
         return NULL;
     }
 
-    if (nom == head->nom) {
-        printf("bon");
+    if (strcmp(nom,head->nom)==0) {
+
         return head;
     }
 
