@@ -65,11 +65,19 @@ int main() {
 
 
 
-    p_CONTACT contact5 = create_contact();
-    insert_contact(&agenda,contact5);
     display_agenda(agenda);
-    p_RDV rdv1 = create_rdv();
-    create_rdv_for_contact(rdv1,&agenda);
+
+    p_CONTACT inconnu = research_contact(agenda.contact_heads[3], "dos_a", 3);
+    if(inconnu == NULL){
+        printf("pp");
+    }else {
+        printf("brrrr");
+    }
+
+
+
+    //p_RDV rdv1 = create_rdv();
+    //create_rdv_for_contact(rdv1,&agenda);
     //p_RDV rdv2 = create_rdv();
     //Insert_rdv(rdv1,contact1);
     //Insert_rdv(rdv2,contact1);

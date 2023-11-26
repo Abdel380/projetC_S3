@@ -12,6 +12,11 @@ void cleanInputBuffer() {
 char* scanstring() {
     char *chaine = malloc(sizeof(char)*100);
     fgets(chaine, 100, stdin);
+    size_t length = strlen(chaine);
+    if (length > 0 && chaine[length - 1] == '\n') {
+        // Remplacer le caractère de nouvelle ligne par le caractère nul
+        chaine[length - 1] = '\0';
+    }
     return chaine;
 }
 
@@ -90,13 +95,14 @@ p_CONTACT empty_contact(){
     p_CONTACT contact = malloc(sizeof(t_CONTACT));
     contact->nom = NULL;
     contact->rdv_head = NULL;
-    contact -> level = 0;
+    contact->level = 0;
     contact->nexts = malloc(sizeof(t_CONTACT)*4);
     for (int i=0; i<4; i++){
         *(contact->nexts+i) = NULL;
     }
     return contact;
 }
+
 
 p_CONTACT create_contact(){
     p_CONTACT contact = empty_contact();
@@ -145,6 +151,7 @@ p_RDV empty_rdv(){
     rdv->d = empty_date();
     rdv->horaire = empty_horaire();
     rdv->objet = empty_objet();
+    rdv->next = NULL;
 
 
     return rdv;
@@ -183,7 +190,7 @@ RDV_HORAIRE create_horaire(){
 
 }
 
-RDV_DUREE  create_duree(){
+RDV_DUREE create_duree(){
 
     RDV_DUREE  duree = empty_duree();
 
@@ -208,49 +215,74 @@ p_RDV create_rdv(){
     cleanInputBuffer();
 
 
+
     return rdv;
 
 }
 
 
 
-void Insert_rdv(p_RDV rdv,p_CONTACT contact){
-    if(contact->rdv_head == NULL){
+void Insert_rdv(p_RDV rdv, p_CONTACT contact) {
+    if (contact->rdv_head == NULL || compareDate(rdv->d, contact->rdv_head->d) == 0) {
+        // Insérer en tête de liste
+        rdv->next = contact->rdv_head;
         contact->rdv_head = rdv;
+        return;
     }
-    else{
-        p_RDV temp = contact->rdv_head;
-        while(compareDate(rdv->d,temp->d)>0 && temp!=NULL){
-            temp = temp->next;
-        }
-        while(compareTime(rdv->horaire,temp->horaire)>0 && temp!=NULL){
-            temp = temp->next;
-        }
-        if(temp == NULL){
-            temp =rdv;
-            temp->next = NULL;
-            temp = temp->next;
-            free(temp);
-        }
+
+    p_RDV temp = contact->rdv_head;
+    p_RDV prev = NULL;
+
+    // Trouver l'endroit approprié pour insérer
+    while (temp != NULL && compareDate(rdv->d, temp->d) == 1) {
+        prev = temp;
+        temp = temp->next;
     }
+
+    // Comparer également l'heure si les dates sont égales
+    while (temp != NULL && compareDate(rdv->d, temp->d) == 0 && compareTime(rdv->horaire, temp->horaire) == 1) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // Insérer le rendez-vous
+    if (prev != NULL) {
+        prev->next = rdv;
+    }
+
+    rdv->next = temp;
 }
 
 
+int number_rdv(t_CONTACT contact){
+
+    int number = 0;
+    while (contact.rdv_head != NULL){
+        contact.rdv_head = contact.rdv_head->next;
+        number++;
+    }
+
+    return number;
+}
 
 void display_rdv(p_RDV rdv){
-    display_date(rdv->d);
+   display_date(rdv->d);
     printf("\n");
     display_horaire(rdv->horaire);
     printf("\n");
     display_duree(rdv->duree);
     printf("\n");
     display_objet(rdv->objet);
+    printf("\n");
     return;
 }
+
 void display_Contact_rdv(t_CONTACT contact){
-    while(contact.rdv_head!=NULL){
+    while(contact.rdv_head !=NULL){
+
         display_rdv(contact.rdv_head);
         contact.rdv_head = contact.rdv_head->next;
+
     }
 }
 

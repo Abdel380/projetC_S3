@@ -177,12 +177,16 @@ void display_agenda(AGENDA agenda){
 
 p_CONTACT research_contact(p_CONTACT head, char * nom, int level) {
     if (head == NULL){
+        printf("pas bon1");
         return NULL;
         }
-    if (strcmp(head->nom, nom) > 0)
+    if (strcmp(head->nom, nom) > 0) {
+        printf("pas bon2");
         return NULL;
+    }
 
     if (nom == head->nom) {
+        printf("bon");
         return head;
     }
 
@@ -220,7 +224,9 @@ void create_rdv_for_contact(p_RDV rdv, AGENDA* agenda) {
 
 
     // Recherche du contact dans l'agenda
+    printf("%s",agenda->contact_heads[3]->nom);
     p_CONTACT tmp = research_contact(agenda->contact_heads[3], nom, 3);
+
 
 
 
