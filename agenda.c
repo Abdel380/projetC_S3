@@ -175,76 +175,79 @@ void display_agenda(AGENDA agenda){
 }
 
 
-p_CONTACT research_contact(p_CONTACT head, char * nom, int level) {
-    if (head == NULL){
+p_CONTACT research_contact(p_CONTACT head, char *nom, int level) {
+    if (head == NULL) {
         return NULL;
-        }
+    }
+
     if (strcmp(head->nom, nom) > 0) {
         return NULL;
     }
 
-    if (strcmp(nom,head->nom)==0) {
-
+    if (strcmp(nom, head->nom) == 0) {
         return head;
     }
 
     if (level == 3 && nom[0] < head->nom[0]) {
         head = head->nexts[3];
         return research_contact(head, nom, level);
-    } else if (level == 3 && nom[0] == head->nom[0])
+    } else if (level == 3 && nom[0] == head->nom[0]) {
         return research_contact(head, nom, level - 1);
-
+    }
 
     if (level == 2 && nom[1] != head->nom[1]) {
         head = head->nexts[2];
         return research_contact(head, nom, level);
-    } else if (level == 2 && nom[1] == head->nom[1])
+    } else if (level == 2 && nom[1] == head->nom[1]) {
         return research_contact(head, nom, level - 1);
-
+    }
 
     if (level == 1 && nom[2] != head->nom[2]) {
         head = head->nexts[1];
         return research_contact(head, nom, level);
-    } else if (level == 1 && nom[2] == head->nom[2])
+    } else if (level == 1 && nom[2] == head->nom[2]) {
         return research_contact(head, nom, level - 1);
-
+    }
 
     if (level == 0 && strcmp(head->nom, nom) < 0) {
         head = head->nexts[0];
         return research_contact(head, nom, level);
     }
 
+    return NULL;  // Ajout d'une condition de retour par défaut
 }
 
-
-void create_rdv_for_contact(p_RDV rdv, AGENDA* agenda) {
-    char* nom = scan_name();
-
+void create_rdv_for_contact(AGENDA *agenda) {
+    char *nom = scan_name();
 
     // Recherche du contact dans l'agenda
-    printf("%s",agenda->contact_heads[3]->nom);
+    p_RDV rdv = create_rdv();
     p_CONTACT tmp = research_contact(agenda->contact_heads[3], nom, 3);
-
-
-
 
     if (tmp == NULL) {
         // Si le contact n'existe pas, créer un nouveau contact
 
         p_CONTACT contact = empty_contact();
+
+
         contact->nom =  nom;
 
+
         insert_contact(agenda, contact);
-        printf("toto");
-        Insert_rdv(rdv,contact);
+
+        Insert_rdv(rdv, contact);
+        display_Contact_rdv(*contact);
 
         // Insérer le nouveau contact dans l'agenda
 
     } else {
+
         // Si le contact existe, insérer le rendez-vous
+
         Insert_rdv(rdv, tmp);
-        printf("popo");
+        display_Contact_rdv(*tmp);
+
     }
 
-
 }
+

@@ -65,19 +65,22 @@ int main() {
 
 
 
-    display_agenda(agenda);
-
-    p_CONTACT contact = create_contact();
 
 
-    p_RDV rdv1 = create_rdv();
-    create_rdv_for_contact(rdv1,&agenda);
-    //p_RDV rdv2 = create_rdv();
-    //Insert_rdv(rdv1,contact1);
+    //p_CONTACT contact = create_contact();
+
+
+
+    create_rdv_for_contact(&agenda);
+
+    p_RDV rdv2 = create_rdv();
+    Insert_rdv(rdv2,contact3);
     //Insert_rdv(rdv2,contact1);
     //printf("%d", number_rdv(*contact1));
-    display_Contact_rdv(*contact1);
 
+    display_Contact_rdv(*contact3);
+    delete_appointment(contact3,contact3->rdv_head);
+    display_Contact_rdv(*contact3);
 
     return 0;
 

@@ -220,6 +220,36 @@ p_RDV create_rdv(){
 
 }
 
+void delete_appointment(p_CONTACT contact,p_RDV rdv){
+    p_RDV temp = contact->rdv_head;
+    p_RDV prev = NULL;
+
+    if ( rdv == contact->rdv_head){
+        contact->rdv_head = contact->rdv_head->next;
+        return;
+    }
+
+    while(temp != rdv && temp!=NULL){
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if(temp==NULL) { // le rdv existe pas
+        printf("Le rendez-vous n'existe pas");
+        return;
+
+    }
+    if(temp == rdv){ // le rdv existe mais n'est pas à la fin
+        prev->next = temp->next;
+        free(temp);
+    }
+
+    else{ // le rdv existe et est à la fin de la liste
+        free(temp);
+        prev->next = NULL;
+    }
+}
+
 
 
 void Insert_rdv(p_RDV rdv, p_CONTACT contact) {
