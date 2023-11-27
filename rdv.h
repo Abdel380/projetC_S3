@@ -72,5 +72,5 @@ p_RDV empty_rdv();
 p_RDV create_rdv();
 void display_rdv(p_RDV);
 
-
+p_RDV search_rdv(char * objet, p_CONTACT contact);
 #endif //PROJET_C_RDV_H

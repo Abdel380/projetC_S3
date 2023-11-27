@@ -212,3 +212,14 @@ void display_rdv(p_RDV rdv){
     display_objet(rdv->objet);
     return;
 }
+
+
+p_RDV search_rdv(char * objet, p_CONTACT contact){
+    p_RDV temp = contact->rdv_head;
+
+    while ( temp != NULL && strcmp(temp->objet.contenu,objet) != 0 ){
+        temp = temp->next;
+    }
+
+    return temp;
+}
