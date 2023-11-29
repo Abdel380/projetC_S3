@@ -81,5 +81,8 @@ p_RDV empty_rdv();
 p_RDV create_rdv();
 void display_rdv(p_RDV);
 
-
+p_RDV search_rdv(char * objet, p_CONTACT contact);
+void save_appointment_to_file(p_CONTACT contact);
+void load_appointment_from_file();
+char * get_name_from_ligne(const char * );
 #endif //PROJET_C_RDV_H

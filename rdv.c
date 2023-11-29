@@ -347,3 +347,80 @@ void display_date(DATE date){
     printf("%d/%d/%d", date.jour, date.mois, date.annee);
     return;
 }
+
+
+p_RDV search_rdv(char * objet, p_CONTACT contact){
+    p_RDV temp = contact->rdv_head;
+
+    while ( temp != NULL && strcmp(temp->objet.contenu,objet) != 0 ){
+        temp = temp->next;
+    }
+
+    return temp;
+}
+
+void save_appointment_to_file(p_CONTACT contact){
+    FILE * appointment_file = fopen("../appointement.csv","a");
+
+    if(appointment_file == NULL){
+        fprintf(stderr,"Not able to open the file.\n");
+        return;
+    }
+    fseek(appointment_file, 0, SEEK_END);// on se déplace a la fin du fichier
+    long file_size = ftell(appointment_file);  // Obtenir la taille du fichier
+
+    // Si le fichier est vide, écrire l'en-tête
+    if (file_size == 0) {
+        fprintf(appointment_file, "nom_contact,objet_rdv,date_rdv,heure_rdv,duree_rdv\n");
+    }
+
+
+    p_RDV ap = contact->rdv_head;
+
+    fprintf(appointment_file,"%s",contact->nom);
+    while(ap!=NULL){
+        fprintf(appointment_file,"[%s,%d/%d/%d,%d:%d,%d:%d]",ap->objet.contenu,ap->d.jour,ap->d.mois,ap->d.annee,ap->horaire.heure,ap->horaire.minutes, ap->duree.heure, ap->duree.minutes);
+        ap = ap->next;
+    }
+    fprintf(appointment_file,"\n");
+    fclose(appointment_file);
+    printf("Les données ont bien été enregistrées\n");
+}
+void load_appointment_from_file(){
+    FILE * appointment_file = fopen("../appointement.csv","r");
+
+
+    if (appointment_file == NULL) {
+        fprintf(stderr, "Impossible d'ouvrir le fichier.\n");
+        return;
+    }
+    char * nom;
+    char ligne[100];  // Assurez-vous que la taille est suffisante
+    while (fgets(ligne, sizeof(ligne), appointment_file) != NULL) {
+        printf("Ligne lue : %s", ligne);
+        if(strcmp(ligne,"nom_contact,objet_rdv,date_rdv,heure_rdv,duree_rdv\n")!=0){
+            nom = get_name_from_ligne(ligne);
+            printf("nom : %s", nom);
+        }
+
+        // Ici, vous pouvez traiter la ligne comme vous le souhaitez
+    }
+
+    fclose(appointment_file);// ferme le fichier
+
+
+}
+
+char * get_name_from_ligne(const char * lign ){
+
+        int i = 0;
+        char * nom =  (char *)malloc(50 * sizeof(char));
+
+        while(lign[i] != '['){
+            nom[i] = lign[i];
+            ++i;
+        }
+        nom[i] = '\0';
+        return nom;
+
+}

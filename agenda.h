@@ -20,4 +20,5 @@ p_CONTACT research_contact(p_CONTACT head, char * nom, int level);
 void create_rdv_for_contact(AGENDA* agenda);
 
 
+
 #endif //PROJET_C_AGENDA_H
