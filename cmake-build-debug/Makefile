@@ -224,6 +224,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/main.c.s
 .PHONY : main.c.s
 
+menu.obj: menu.c.obj
+.PHONY : menu.obj
+
+# target to build an object file
+menu.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/menu.c.obj
+.PHONY : menu.c.obj
+
+menu.i: menu.c.i
+.PHONY : menu.i
+
+# target to preprocess a source file
+menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/menu.c.i
+.PHONY : menu.c.i
+
+menu.s: menu.c.s
+.PHONY : menu.s
+
+# target to generate assembly for a file
+menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projet_c.dir\build.make CMakeFiles/Projet_c.dir/menu.c.s
+.PHONY : menu.c.s
+
 rdv.obj: rdv.c.obj
 .PHONY : rdv.obj
 
@@ -293,6 +317,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... menu.obj
+	@echo ... menu.i
+	@echo ... menu.s
 	@echo ... rdv.obj
 	@echo ... rdv.i
 	@echo ... rdv.s

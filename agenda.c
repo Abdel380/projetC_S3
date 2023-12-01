@@ -137,16 +137,15 @@ void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp,
 
     // chainage pour les nexts
     if (level <= level_next){
+        prev->nexts[level] = contact;
         contact->nexts[level] = temp;
-        printf("cacao");
     }
     else{
-        contact->nexts[level] = temp->nexts[level]->nexts[level];
+        prev->nexts[level] = contact;
+        contact->nexts[level] = temp->nexts[level];
         temp->nexts[level] = NULL;
         temp->level = level_next;
     }
-
-
 }
 
 void display_agenda_by_level(AGENDA agenda, int level){
@@ -233,7 +232,6 @@ void create_rdv_for_contact(AGENDA *agenda) {
     //printf("%s",tmp->nom);
     if (tmp == NULL) {
         // Si le contact n'existe pas, créer un nouveau contact
-        printf("popo455");
         p_CONTACT contact = empty_contact();
 
 
@@ -255,6 +253,65 @@ void create_rdv_for_contact(AGENDA *agenda) {
         //display_Contact_rdv(*tmp);
 
     }
+
+}
+
+void load_appointment_from_file(AGENDA * agenda){
+    FILE * appointment_file = fopen("../appointement.csv","r");
+    char * temp=  (char *)malloc(100 * sizeof(char));
+    int j = 0;
+    char * rdv_char = (char *)malloc(150 * sizeof(char));
+    int k =0;
+    unsigned int l;
+
+    unsigned int i;
+    char * nom;
+    char lign[100];  // Assurez-vous que la taille est suffisante
+    while (fgets(lign, sizeof(lign), appointment_file) != NULL) {
+        if(strcmp(lign,"nom_contact,objet_rdv,date_rdv,heure_rdv,duree_rdv\n")!=0){
+            j=0;
+            nom = get_name_from_lign(lign);
+            i = strlen(nom);
+
+            p_CONTACT contact = empty_contact();
+            while(lign[i]!='~'){
+                if(lign[i] == '['){
+                    k = 0;
+                    l = i+1;
+
+                    while(lign[l]!=']'){
+                        rdv_char[k] = lign[l];
+                        k++;
+                        l++;
+
+                    }
+                    rdv_char[k]='\0';
+
+                    p_RDV rdv  = get_appointment_characteristics( rdv_char,nom);
+                    contact->nom =nom;
+                    Insert_rdv(rdv,contact);
+
+
+                }
+
+                ++i;
+            }
+
+            insert_contact(agenda,contact);
+            //display_Contact_rdv(*contact);
+
+
+        }
+
+
+
+        // Ici, vous pouvez traiter la ligne comme vous le souhaitez
+    }
+
+    fclose(appointment_file);// ferme le fichier
+    free(temp);
+    free(rdv_char);
+
 
 }
 

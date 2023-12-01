@@ -157,14 +157,28 @@ p_RDV empty_rdv(){
     return rdv;
 }
 
-DATE create_date(){
+DATE create_date() {
     DATE date = empty_date();
-    do{
-        printf("Quelle est la date de votre rendez vous (format jj/mm/aaaa)"); // assignation pour l'annee
-        scanf("%d/%d/%d", &(date.jour), &(date.mois), &(date.annee));
-    }while (date.annee < 2024 || ( date.mois <= 0 || date.mois > 12 ) || (date.jour <= 0) || ((date.mois == 1 || date.mois == 3 || date.mois == 5 || date.mois == 7 || date.mois == 8 || date.mois == 10 || date.mois == 12) && (date.jour > 31)) || ((date.mois == 4 || date.mois == 6 || date.mois == 9 || date.mois == 11) && (date.jour > 30)) || ((date.mois == 2) && (date.jour > 28)));
+    int result;
+
+    do {
+        printf("Quelle est la date de votre rendez-vous (format jj/mm/aaaa) : ");
+        result = scanf("%d/%d/%d", &(date.jour), &(date.mois), &(date.annee));
+
+        if (result != 3) {
+            printf("Format incorrect. Veuillez utiliser jj/mm/aaaa.\n");
+            // Vider le tampon d'entrée en cas d'une saisie incorrecte
+            while (getchar() != '\n');
+        }
+
+    } while (date.annee < 2024 || (date.mois <= 0 || date.mois > 12) || (date.jour <= 0) ||
+             ((date.mois == 1 || date.mois == 3 || date.mois == 5 || date.mois == 7 || date.mois == 8 || date.mois == 10 || date.mois == 12) && (date.jour > 31)) ||
+             ((date.mois == 4 || date.mois == 6 || date.mois == 9 || date.mois == 11) && (date.jour > 30)) ||
+             ((date.mois == 2) && (date.jour > 28)));
+
     return date;
 }
+
 
 
 RDV_OBJET create_objet(){
@@ -176,19 +190,41 @@ RDV_OBJET create_objet(){
 
     return objet;
 }
+int check_output(char * output){
+
+    int exit = 1;
+    int i = 0;
+    while(output[i] != '\0'){
+        if ( output[i] == ':'){
+            exit = 0;
+        }
+        i++;
+    }
+
+    return exit;
+}
+
+
 
 RDV_HORAIRE create_horaire(){
 
     RDV_HORAIRE horaire = empty_horaire();
     do{
         printf("A quelle heure est votre rdv (hh:mm) :"); // assignation pour l'heure
-        scanf("%d:%d", &(horaire.heure),&(horaire.minutes));
-    }while ( horaire.heure < 0 || horaire.heure > 23 || horaire.minutes < 0 || horaire.heure > 59);
+        int result = scanf("%d%*[:]%d", &(horaire.heure), &(horaire.minutes));
 
+        // Vérifier si la saisie a été réussie correctement
+        if (result != 2) {
+            printf("Format incorrect. Veuillez utiliser hh:mm.\n");
+            // Effacer le tampon d'entrée en cas d'une saisie incorrecte
+            while (getchar() != '\n');
+        }
+
+    }while ( horaire.heure < 0 || horaire.heure > 23 || horaire.minutes < 0 || horaire.minutes > 59);
 
     return  horaire;
-
 }
+
 
 RDV_DUREE create_duree(){
 
@@ -382,36 +418,13 @@ void save_appointment_to_file(p_CONTACT contact){
         fprintf(appointment_file,"[%s,%d/%d/%d,%d:%d,%d:%d]",ap->objet.contenu,ap->d.jour,ap->d.mois,ap->d.annee,ap->horaire.heure,ap->horaire.minutes, ap->duree.heure, ap->duree.minutes);
         ap = ap->next;
     }
+    fprintf(appointment_file,"~");
     fprintf(appointment_file,"\n");
     fclose(appointment_file);
     printf("Les données ont bien été enregistrées\n");
 }
-void load_appointment_from_file(){
-    FILE * appointment_file = fopen("../appointement.csv","r");
 
-
-    if (appointment_file == NULL) {
-        fprintf(stderr, "Impossible d'ouvrir le fichier.\n");
-        return;
-    }
-    char * nom;
-    char ligne[100];  // Assurez-vous que la taille est suffisante
-    while (fgets(ligne, sizeof(ligne), appointment_file) != NULL) {
-        printf("Ligne lue : %s", ligne);
-        if(strcmp(ligne,"nom_contact,objet_rdv,date_rdv,heure_rdv,duree_rdv\n")!=0){
-            nom = get_name_from_ligne(ligne);
-            printf("nom : %s", nom);
-        }
-
-        // Ici, vous pouvez traiter la ligne comme vous le souhaitez
-    }
-
-    fclose(appointment_file);// ferme le fichier
-
-
-}
-
-char * get_name_from_ligne(const char * lign ){
+char * get_name_from_lign(const char * lign ){
 
         int i = 0;
         char * nom =  (char *)malloc(50 * sizeof(char));
@@ -424,3 +437,83 @@ char * get_name_from_ligne(const char * lign ){
         return nom;
 
 }
+
+
+
+p_RDV get_appointment_characteristics(char * app,char*nom){
+
+    p_RDV rdv = empty_rdv();
+
+    char **result = (char **)malloc(10 * sizeof(char*));
+
+
+
+
+    splitToken(app,&result);
+
+    strcpy(rdv->objet.contenu,result[0]);
+
+    get_date_characteristics(result[1],rdv);
+
+    get_hour_characteristics(result[2],rdv);
+
+    get_time_characteristics(result[3],rdv);
+
+
+
+    return rdv;
+
+}
+
+void splitToken(char *token, char ***result) {
+
+    // Utilisation de strtok pour diviser le token en mots
+    char *tokenCopy = strdup(token); // strtok modifie la chaîne, donc faisons une copie
+
+    char *word = strtok(tokenCopy, ",");
+
+    int i = 0;
+    while (word != NULL && i < 4) {
+        (*result)[i] = strdup(word);
+        word = strtok(NULL, ",");
+        i++;
+    }
+
+    free(tokenCopy);
+}
+
+
+
+void get_date_characteristics(char * date,p_RDV rdv){
+
+    char * temp = date;
+    temp= strtok(temp, "/");
+    rdv->d.jour = atoi(temp);
+    temp = strtok(NULL, "/");
+    rdv->d.mois = atoi(temp);
+    temp = strtok(NULL, "");
+    rdv->d.annee = atoi(temp);
+
+
+}
+
+
+void get_hour_characteristics(char * hour, p_RDV rdv) {
+
+    char * hour2 = hour;
+    hour2 = strtok(hour, ":");
+    rdv->horaire.heure = atoi(hour2);
+    hour2 = strtok(NULL, "");
+    rdv->horaire.minutes = atoi(hour2);
+
+}
+void get_time_characteristics(char * duree, p_RDV rdv){
+
+    char * temp = duree;
+    temp = strtok(duree, ":");
+    rdv->duree.heure = atoi(temp);
+    temp = strtok(NULL, "");
+    rdv->duree.minutes = atoi(temp);
+
+}
+

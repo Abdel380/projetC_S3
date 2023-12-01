@@ -83,6 +83,13 @@ void display_rdv(p_RDV);
 
 p_RDV search_rdv(char * objet, p_CONTACT contact);
 void save_appointment_to_file(p_CONTACT contact);
-void load_appointment_from_file();
-char * get_name_from_ligne(const char * );
+
+char * get_name_from_lign(const char * );
+p_RDV get_appointment_characteristics(char *,char * );
+void get_date_characteristics(char *, p_RDV);
+void get_hour_characteristics(char *, p_RDV);
+void get_time_characteristics(char * ,p_RDV);
+void splitToken(char *token, char ***result);
+int check_output(char *);
+
 #endif //PROJET_C_RDV_H

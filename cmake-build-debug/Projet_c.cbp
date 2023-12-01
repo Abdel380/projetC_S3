@@ -97,6 +97,12 @@
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S3/main.c">
 			<Option target="Projet_c"/>
 		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S3/menu.c">
+			<Option target="Projet_c"/>
+		</Unit>
+		<Unit filename="C:/Users/alex/CLionProjects/projetC_S3/menu.h">
+			<Option target="Projet_c"/>
+		</Unit>
 		<Unit filename="C:/Users/alex/CLionProjects/projetC_S3/rdv.c">
 			<Option target="Projet_c"/>
 		</Unit>

@@ -2,7 +2,7 @@
 #include "list.h"
 #include "timer.h"
 #include "time.h"
-#include "agenda.h"
+#include "menu.h"
 
 int main() {
     /*int size = 10;
@@ -16,17 +16,17 @@ int main() {
     displayTime();*/
 
     // CREATION DE 3 CONTACT
-    /*AGENDA  agenda = empty_agenda();
-    p_CONTACT contact1 = create_contact();
-    insert_contact(&agenda, contact1);
+    AGENDA  agenda = empty_agenda();
+    //p_CONTACT contact1 = create_contact();
+    //insert_contact(&agenda, contact1);
 
-
+/*
     p_CONTACT contact2 = create_contact();
     insert_contact(&agenda, contact2);
 
     p_CONTACT contact3 = create_contact();
-    insert_contact(&agenda, contact3);
-*/
+    insert_contact(&agenda, contact3);*/
+
 
 
     // AFFICHAGE DES NOMS ET DES NIVEAUX
@@ -62,9 +62,12 @@ int main() {
 
 
 
-    char * lign = "vzq_alex[popo,12/12/2024,12:30,1:30][popo2,12/12/2025,12:30,1:30]";
-    char * nom = get_name_from_ligne(lign);
-    printf("%s",nom);
+    //char * lign = "vzq_alex[popo,12/12/2024,12:30,1:30][popo2,12/12/2025,12:30,1:30]";
+    //load_appointment_from_file();
+
+    //p_RDV  rdv = get_appointment_characteristics(lign,nom);
+    //display_rdv(rdv);
+    //printf("%s",nom);
 
 
 
@@ -76,7 +79,12 @@ int main() {
     //create_rdv_for_contact(&agenda);
     //create_rdv_for_contact(&agenda);
     //save_appointment_to_file(contact1);
-    //load_appointment_from_file();
+
+    //load_appointment_from_file(&agenda);
+    //display_agenda(agenda);
+   // p_CONTACT contact  = research_contact(agenda.contact_heads[3],"p_romain",3);
+   // display_Contact_rdv(*contact);
+
     //create_rdv_for_contact(&agenda);
     //create_rdv_for_contact(&agenda);
 
@@ -90,6 +98,7 @@ int main() {
     //display_Contact_rdv(*contact3);
     //delete_appointment(contact3,contact3->rdv_head);
     //display_Contact_rdv(*contact3);
+    menu(&agenda);
     return 0;
 
 }

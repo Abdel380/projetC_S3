@@ -19,4 +19,6 @@ add_executable(Projet_c main.c
         rdv.c
         rdv.c
         rdv.c
+        menu.h
+        menu.c
 )

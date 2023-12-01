@@ -16,7 +16,7 @@ void display_agenda_by_level(AGENDA agenda, int level);
 
 void display_agenda(AGENDA agenda);
 p_CONTACT research_contact(p_CONTACT head, char * nom, int level);
-
+void load_appointment_from_file(AGENDA * agenda);
 void create_rdv_for_contact(AGENDA* agenda);
 
 
