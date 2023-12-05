@@ -3,17 +3,20 @@
 #include "timer.h"
 #include "time.h"
 #include "menu.h"
+#define MAXLINES 1000
 
 int main() {
-    /*int size = 10;
+    int size = 3;
     int nb_recherche = 100000;
     int present;
     t_list lst2 = create_list(size);
     startTimer();
     for(int i = 0;i<nb_recherche;i++)
-        present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
+        present = dichotomie_research_cell(lst2, lst2.heads[size-1], 8);
+        printf("%d\n",present);
     stopTimer();
-    displayTime();*/
+    displayTime();
+    display_list(lst2);
 
     // CREATION DE 3 CONTACT
     AGENDA  agenda = empty_agenda();
@@ -98,7 +101,13 @@ int main() {
     //display_Contact_rdv(*contact3);
     //delete_appointment(contact3,contact3->rdv_head);
     //display_Contact_rdv(*contact3);
-    menu(&agenda);
+    //menu(&agenda);
+    //create_empty_list()
+    //load_contact_from_file( &agenda);
+
+    //display_agenda(agenda);
+    //t_list list = create_list(3 );
+    //display_list(list);
     return 0;
 
 }

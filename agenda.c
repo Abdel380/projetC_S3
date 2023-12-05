@@ -305,7 +305,6 @@ void load_appointment_from_file(AGENDA * agenda){
 
 
 
-        // Ici, vous pouvez traiter la ligne comme vous le souhaitez
     }
 
     fclose(appointment_file);// ferme le fichier
@@ -313,5 +312,40 @@ void load_appointment_from_file(AGENDA * agenda){
     free(rdv_char);
 
 
+}
+
+
+void load_contact_from_file(AGENDA * agenda){
+    FILE * first_name_file = fopen("../nat2021.csv","r");
+    char * first_name = malloc(30 * sizeof(char));
+    char* surname = malloc(30 * sizeof(char));
+    char lign[100];
+    char * surname_name = malloc(60 * sizeof(char));
+    int cpt = 0;
+
+
+    while (fgets(lign, sizeof(lign), first_name_file) != NULL){
+        strcpy(first_name, strtok(lign, " "));
+        strcpy(surname, strtok(NULL, ""));
+
+
+        strcpy(surname_name, surname);
+        strcat(surname_name, "_");
+        strcat(surname_name, first_name);
+
+        convert_maj_min(surname_name);
+        p_CONTACT contact = empty_contact();
+        contact->nom = strdup(surname_name);
+
+
+        insert_contact(agenda,contact);
+
+
+
+
+
+
+    }
+    fclose(first_name_file);
 }
 

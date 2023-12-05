@@ -440,6 +440,11 @@ char * get_name_from_lign(const char * lign ){
 
 
 
+
+
+
+
+
 p_RDV get_appointment_characteristics(char * app,char*nom){
 
     p_RDV rdv = empty_rdv();

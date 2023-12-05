@@ -159,8 +159,12 @@ int level_0_research_list(t_list list, int val){
 
 
 int dichotomie_research_cell(t_list lst, p_cell cell, int value){
+
     if(value == cell->value){
         return 1;
+    }
+    if(value>power(2,lst.max_level)-1 || value<1){
+        return 0;
     }
     else if ((cell->value < value) && (cell->level > 0)){
         for (int i=0; i<lst.max_level; i++){
@@ -170,7 +174,8 @@ int dichotomie_research_cell(t_list lst, p_cell cell, int value){
         return dichotomie_research_cell(lst, cell->nexts[cell->level - 1], value) != 0;
     }
 
-    {
-        return dichotomie_research_cell(lst,lst.heads[cell->level - 1], value) != 0;
+    else if(cell->value> value && cell->level>0) {
+        return dichotomie_research_cell(lst, lst.heads[cell->level - 1], value) != 0;
     }
+
 }
