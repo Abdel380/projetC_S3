@@ -2,24 +2,24 @@
 #define PROJET_C_MENU_H
 #include "agenda.h"
 
-void menu(AGENDA * agenda);
+void menu(Agenda * agenda);
 
 void header();
-void page_1(AGENDA * agenda);
+void page_1(Agenda * agenda);
 void help();
 
 //FCTS
-void create(AGENDA * agenda);
-void display(AGENDA agenda);
-void add(AGENDA * agenda);
-void showRDV(AGENDA agenda);
+void create(Agenda * agenda);
+void display(Agenda agenda);
+void add(Agenda * agenda);
+void showRDV(Agenda agenda);
 
 // TOOLS
 void clearScreen();
 void printRed(const char *text);
 void printBlue(const char *text);
-void load(AGENDA* agenda);
-void save(AGENDA agenda);
+void load(Agenda* agenda);
+void save(Agenda agenda);
 
 
 #endif //PROJET_C_MENU_H
