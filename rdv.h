@@ -6,89 +6,91 @@
 #include <stdio.h>
 
 typedef struct{
-    int jour;
-    int mois;
-    int annee;
-}DATE;
+    int day;
+    int month;
+    int year;
+}date;
 
 typedef struct{
-    int heure;
-    int minutes;
-}RDV_HORAIRE;
+    int hour;
+    int minute;
+}app_hour;
 
 typedef struct{
-    int heure;
-    int minutes;
-}RDV_DUREE;
+    int hour;
+    int minute;
+}app_time;
 
 typedef struct{
-    char * contenu;
-}RDV_OBJET;
+    char * content;
+}app_object;
 
 typedef struct s_RDV
 {
-    DATE d;
-    RDV_HORAIRE horaire;
-    RDV_DUREE duree;
-    RDV_OBJET objet;
+    date d;
+    app_hour hour;
+    app_time time;
+    app_object object;
     struct s_RDV * next; // tableau de pointeurs
-} t_RDV, *p_RDV;
+} t_app, *p_app;
 
 
 typedef struct s_CONTACT
 {
-    char * nom;
+    char * name;
     int level;
-    p_RDV rdv_head; // tete de la liste
+    p_app app_head; // tete de la liste
     struct s_CONTACT ** nexts ; // tableau de pointeur
-} t_CONTACT, *p_CONTACT;
+} t_Contact, *p_Contact;
 
-p_CONTACT empty_contact();
+// TOOLS
+char* scanstring();
+int compareDate(date date1, date date2);
+int compareTime(app_hour time1, app_hour time2);
+void convert_maj_min(char * chaine);
+
+
+//CONTACT
+p_Contact empty_contact();
 char* scan_name();
 void cleanInputBuffer();
-char* scanstring();
-int compareDate(DATE date1, DATE date2);
-int compareTime(RDV_HORAIRE time1, RDV_HORAIRE time2);
 
-DATE empty_date();
-DATE create_date();
-
-p_CONTACT create_contact();
-RDV_HORAIRE empty_horaire();
-RDV_HORAIRE create_horaire();
-RDV_DUREE empty_duree();
-RDV_DUREE create_duree();
-RDV_OBJET empty_objet();
-RDV_OBJET create_objet();
-void Insert_rdv(p_RDV rdv,p_CONTACT contact);
-void delete_appointment(p_CONTACT contact,p_RDV rdv);
-int number_rdv(t_CONTACT contact);
+//APPOINTMENT CONTENT
+date empty_date();
+date create_date();
+p_Contact create_contact();
+app_hour empty_hour();
+app_hour create_hour();
+app_time empty_time();
+app_time create_time();
+app_object empty_object();
+app_object create_object();
+void insert_app(p_app app, p_Contact contact);
+void delete_appointment(p_Contact contact, p_app rdv);
+int number_appointment(t_Contact contact);
 
 
-
-void display_contact(t_CONTACT);
-void display_date(DATE);
-void display_horaire(RDV_HORAIRE);
-void display_duree(RDV_DUREE);
-void display_objet(RDV_OBJET);
-void convert_maj_min(char * chaine);
-void display_Contact_rdv(t_CONTACT contact);
+//DISPLAY
+void display_contact(t_Contact);
+void display_date(date);
+void display_hour(app_hour);
+void display_time(app_time);
+void display_object(app_object);
+void display_Contact_appointment(t_Contact contact);
 
 
 
-
-p_RDV empty_rdv();
-p_RDV create_rdv();
-void display_rdv(p_RDV);
-
-p_RDV search_rdv(char * objet, p_CONTACT contact);
-void save_appointment_to_file(p_CONTACT contact);
-
+//APPOINTMENT  &&  FILE EXPLORATION
+p_app empty_app();
+p_app create_app();
+void display_app(p_app);
+p_app search_appointment(char * objet, p_Contact contact);
+void save_appointment_to_file(p_Contact contact);
 char * get_name_from_lign(const char * );
-p_RDV get_appointment_characteristics(char *,char * );
-void get_date_characteristics(char *, p_RDV);
-void get_hour_characteristics(char *, p_RDV);
-void get_time_characteristics(char * ,p_RDV);
+p_app get_appointment_characteristics(char *, char * );
+void get_date_characteristics(char *, p_app);
+void get_hour_characteristics(char *, p_app);
+void get_time_characteristics(char * , p_app);
 void splitToken(char *token, char ***result);
 int check_output(char *);
 

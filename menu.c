@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu(AGENDA * agenda){
+void menu(Agenda * agenda){
     clearScreen();
     header();
     page_1(agenda);
@@ -14,7 +14,7 @@ void header(){
     printf("######################################################\n");
 }
 
-void page_1(AGENDA * agenda){
+void page_1(Agenda * agenda){
     printBlue("\nEnter your prompt (help) :\n");
     printBlue(">>> ");
     char prompt[20];
@@ -79,43 +79,43 @@ void help(){
     printf("exitS   : Quitter en sauvgardant.\n\n");
 }
 
-void create(AGENDA * agenda){
+void create(Agenda * agenda){
     printBlue("Oh ! Un nouveau contact :\n");
-    p_CONTACT contact1 = create_contact();
+    p_Contact contact1 = create_contact();
     insert_contact(agenda, contact1);
     printf("Eh op, c'est dans la boite !");
 }
 
-void display(AGENDA agenda){
+void display(Agenda agenda){
     printBlue("Contact display\n");
     display_agenda(agenda);
     printf("\n");
 }
-void add(AGENDA * agenda){
+void add(Agenda * agenda){
     printBlue("Appointments being added :\n");
     create_rdv_for_contact(agenda);
     printBlue("Appointment added ! \n");
 }
 
-void showRDV(AGENDA agenda){
+void showRDV(Agenda agenda){
     printBlue("What is the contact's first name ? \n");
     char * name = scan_name();
-    p_CONTACT contact = research_contact(agenda.contact_heads[3], name, 3);
+    p_Contact contact = research_contact(agenda.contact_heads[3], name, 3);
     if(contact != NULL){
-        display_Contact_rdv(*contact);
+        display_Contact_appointment(*contact);
         printf("\n");
         return;
     }
     printBlue("The contact doesn't exist !\n");
 }
 
-void load(AGENDA* agenda){
+void load(Agenda* agenda){
     printBlue("loading...\n");
     load_appointment_from_file(agenda);
     printBlue("your contacts appointments have been loaded");
 }
 
-void save(AGENDA agenda){
+void save(Agenda agenda){
     printf("saving...\n");
     FILE * appointment_file = fopen("../appointement.csv","w");
     while(agenda.contact_heads[0] != NULL){

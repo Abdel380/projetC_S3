@@ -1,25 +1,25 @@
-#ifndef PROJET_C_AGENDA_H
-#define PROJET_C_AGENDA_H
+#ifndef PROJET_C_agenda_H
+#define PROJET_C_agenda_H
 
 #include "rdv.h"
 
 typedef struct {
-    t_CONTACT ** contact_heads;
-}AGENDA;
+    t_Contact ** contact_heads;
+}Agenda;
 
-AGENDA empty_agenda();
+Agenda empty_agenda();
 
-void insert_contact(AGENDA* agenda,p_CONTACT contact);
-void insert_by_level(AGENDA* agenda,p_CONTACT contact,int level, p_CONTACT temp, int level_next);
+void insert_contact(Agenda* agenda,p_Contact contact);
+void insert_by_level(Agenda* agenda,p_Contact contact,int level, p_Contact temp, int level_next);
 
-void display_agenda_by_level(AGENDA agenda, int level);
+void display_agenda_by_level(Agenda agenda, int level);
 
-void display_agenda(AGENDA agenda);
-p_CONTACT research_contact(p_CONTACT head, char * nom, int level);
-void load_appointment_from_file(AGENDA * agenda);
-void create_rdv_for_contact(AGENDA* agenda);
-void load_contact_from_file(AGENDA * agenda);
+void display_agenda(Agenda agenda);
+p_Contact research_contact(p_Contact head, char * nom, int level);
+void load_appointment_from_file(Agenda * agenda);
+void create_rdv_for_contact(Agenda* agenda);
+void load_contact_from_file(Agenda * agenda);
 
 
 
-#endif //PROJET_C_AGENDA_H
+#endif //PROJET_C_agenda_H

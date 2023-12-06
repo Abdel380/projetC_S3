@@ -7,7 +7,7 @@ t_list create_empty_list(int max_size){
         max_size = 0;
     }
     list.max_level = max_size;
-    list.heads = malloc(sizeof(p_cell)*max_size);
+    list.heads = malloc(sizeof(p_cell)*max_size);// we allocate the memory we need to store the cells
     for(int i = 0; i<max_size;i++){
         list.heads[i] = NULL;
     }
@@ -24,23 +24,20 @@ int power(int a, int b){
 
 t_list create_list(int size){
     t_list list = create_empty_list(size);
-    int * tab = calloc((power(2, size)-1) ,sizeof(int)); // On prend un tableau de power(2, size) valeur car on se passera de la première case mais on prendra une case en plus à la fin
-    int indice = 0;
+    int * tab = calloc((power(2, size)-1) ,sizeof(int));
+    int index = 0;
 
     for(int i = 0;i<size;i++){
-        indice = 0;
-        while(indice< power(2,size)){
-            if(indice!=0) {
-                tab[indice-1] = i;
+        index = 0;
+        while(index< power(2,size)){
+            if(index!=0) {
+                tab[index-1] = i;
             }
-            indice += power(2, i);
-
-
-
+            index += power(2, i);
         }
     }
 
-    if (size > 0){
+    if (size > 0){      // we create the list based on the array that contains the level of each cell
         p_cell temp;
         for (int i = 0; i<power(2, size)-1; i++){
             temp = createCell(i+1,tab[i]);
@@ -51,26 +48,26 @@ t_list create_list(int size){
 }
 
 void add_head_list(t_list * lst, p_cell cell) {
-    if (lst->heads[0] == NULL){
-        for (int i=0; i<cell->level;i++){
+    if (lst->heads[0] == NULL){ // case of an empty list
+        for (int i=0; i<cell->level;i++){ // change the head for all levels
             lst->heads[i] = cell;
         }
         return;
     }
-    for (int i=0; i<cell->level;i++){
+    for (int i=0; i<cell->level;i++){ // case of a non-empty list
         cell->nexts[i] = lst->heads[i];
         lst->heads[i] = cell;
     }
 }
 
 void display_list_by_level(t_list lst, int level){
-    level--; // Par convention on affiche la ligne 0 pour le level un
+    level--; // By convention we display line 0 for level one
     printf("[list head_%d @-]", level);
     p_cell base = lst.heads[0];
     p_cell cell = lst.heads[level];
     while (base != NULL){
         if (base == cell){
-            printf("-->[%d|@-]",cell->value);
+            printf("-->[%d|@-]",cell->value); // display the value
             cell = cell->nexts[level];
         }
         else{
@@ -81,7 +78,7 @@ void display_list_by_level(t_list lst, int level){
         }
         base = base->nexts[0];
     }
-    printf("-->NULL\n");
+    printf("-->NULL\n"); // for the end of the list
 }
 
 int get_size_list(t_list lst){
@@ -108,105 +105,119 @@ int * from_list_to_tab(t_list lst){
 }
 
 void display_list(t_list lst){
-    for (int i=1; i<=lst.max_level; i++) {
+    for (int i=1; i<=lst.max_level; i++) { // we use a for loop for all levels
         display_list_by_level(lst, i);
     }
 }
 
 
-void insert_cell_level(t_list * lst, p_cell cell, int level){
-}
+
 
 
 void insert_cell(t_list * lst, p_cell cell){
-    p_cell temp = NULL; // Initialisation d'un pointeur temporaire à NULL
+    p_cell temp = NULL; // initialisation of a NULL pointer
 
-    for (int i = 0; i < cell->level+1; i++){ // Boucle parcourant les niveaux de la cellule
-        if (lst->heads[i] == NULL || lst->heads[i]->value >= cell->value) { // Si la liste est vide ou si la valeur de la tête est supérieure ou égale à la valeur de la cellule
-            cell->nexts[i] = lst->heads[i]; // La cellule devient la nouvelle tête de liste
+    for (int i = 0; i < cell->level+1; i++){ // loop that travel all the levels
+        if (lst->heads[i] == NULL || lst->heads[i]->value >= cell->value) { // if the list is empty or if the head's value is superior or equal to the cell's value
+            cell->nexts[i] = lst->heads[i]; // the cell become the new head of the list;
             lst->heads[i] = cell;
         } else {
-            temp = lst->heads[i]; // Pointeur temporaire pointe vers la tête de la liste
+            temp = lst->heads[i]; //temporary pointer to the head of the list
             while ((temp->nexts[i] != NULL) && (temp->nexts[i]->value < cell->value)) {
-                // Tant que le prochain élément n'est pas NULL et que sa valeur est inférieure à celle de la cellule
-                temp = temp->nexts[i]; // Avancer dans la liste
+                //while the next element is not NULL and it's value is inferior to the cell value
+                temp = temp->nexts[i]; // move foward in the list
             }
-            cell->nexts[i] = temp->nexts[i]; // La cellule pointe vers le prochain élément
-            temp->nexts[i] = cell; // L'élément précédent pointe vers la cellule
+            cell->nexts[i] = temp->nexts[i]; // the cell point to the next cell
+            temp->nexts[i] = cell; // the previous cell point to the cell
         }
     }
 }
 
 int level_0_research_cell(p_cell cell, int val){
-
-
-    while ( cell != NULL){
+    while ( cell != NULL){  // we move forward in the untill we find the value we search
         if ( cell->value == val){
             return 1;
         }
         cell = cell->nexts[0];
     }
-
     return 0;
 }
 
 int level_0_research_list(t_list list, int val){
-
     return level_0_research_cell(list.heads[0], val);
-
 }
 
 
 
-int dichotomie_research_cell(t_list lst, p_cell cell, int value){
+int dichotomic_research_cell(t_list lst, p_cell cell, int value){
 
     if(value == cell->value){
         return 1;
     }
-    if(value>power(2,lst.max_level)-1 || value<1){
+    if(value>power(2,lst.max_level)-1 || value<1){ //if the value is <1 or > to the value max in the list we return 0
         return 0;
     }
-    else if ((cell->value < value) && (cell->level > 0)){
-        for (int i=0; i<lst.max_level; i++){
+    else if ((cell->value < value) && (cell->level > 0)){ // if the value is in the second part of the list
+        for (int i=0; i<lst.max_level; i++){ //we move the heads to the middle of the list
             p_cell temp = lst.heads[i];
             temp = cell->nexts[i];
         }
-        return dichotomie_research_cell(lst, cell->nexts[cell->level - 1], value) != 0;
+        return dichotomic_research_cell(lst, cell->nexts[cell->level - 1], value) != 0; // we change the level and go to the second part of the list
     }
 
     else if(cell->value> value && cell->level>0) {
-        return dichotomie_research_cell(lst, lst.heads[cell->level - 1], value) != 0;
+        return dichotomic_research_cell(lst, lst.heads[cell->level - 1], value) != 0; // whe change the level and go the first cell
     }
+}
+int dichotomic_research(t_list list, int val){
+    return dichotomic_research_cell(list,list.heads[list.max_level-1],val);
 }
 
 
-
 void timer_listNumber(int size_max){
-    int size_temp = 7;
-    int nombreAleatoire;
-    while (size_temp <= size_max){
-        t_list lst = create_list(size_temp);
+    FILE *log_file = fopen("../log.txt","w");
+    char format[] = "%d\t%s\t%s\n" ;
+    char *time_lvl0;
+    char *time_all_levels;
 
-        int find;
-
+    int level = 7;
+    int random_number;
+    while (level <= size_max){
+        t_list lst = create_list(level);
+        int found;
+        srand((unsigned int)time(NULL));
         startTimer();
         for (int i=0; i<10000; i++){
-            nombreAleatoire = rand() % (power(2, size_temp)-1);
-            find = dichotomie_research_cell(lst, lst.heads[size_temp-1], nombreAleatoire);
+            random_number = rand() % (power(2, level)-1);
+            found = level_0_research_list(lst,random_number);
+
         }
+
         stopTimer();
-        printf("Niveau %d\n==========\nDicotomique : ", size_temp);
+        time_lvl0 = getTimeAsString(); // fonction du module timer
+
+        printf("Niveau %d\n==========\nStandard :",level);
         displayTime();
 
         startTimer();
         for (int i=0; i<10000; i++){
-            nombreAleatoire = rand() % (power(2, size_temp)-1);
-            find = level_0_research_list(lst,nombreAleatoire);
+            random_number = rand() % (power(2, level)-1);
+
+            found = dichotomic_research(lst, random_number);
+
         }
         stopTimer();
-        printf("==========\nStandart :");
+        time_all_levels = getTimeAsString();
+
+
+        printf("==========\nDichotomique : ");
+
         displayTime();
 
-        size_temp++;
+        fprintf(log_file,format,level,time_lvl0, time_all_levels);
+
+        level++;
     }
+
+    fclose(log_file);
 };
