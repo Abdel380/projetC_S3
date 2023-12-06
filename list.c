@@ -201,7 +201,7 @@ void timer_listNumber(int size_max){
         startTimer();
         for (int i=0; i<10000; i++){
             nombreAleatoire = rand() % (power(2, size_temp)-1);
-            find = dichotomie_research_cell(lst, lst.heads[size_temp-1], nombreAleatoire);
+            find = level_0_research_list(lst,nombreAleatoire);
         }
         stopTimer();
         printf("==========\nStandart :");

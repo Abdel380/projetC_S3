@@ -18,7 +18,7 @@ int main() {
     stopTimer();
     displayTime();
      */
-    timer_listNumber(20);
+    timer_listNumber(16);
 
     // CREATION DE 3 CONTACT
     //AGENDA  agenda = empty_agenda();
