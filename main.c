@@ -6,20 +6,18 @@
 #define MAXLINES 1000
 
 int main() {
-    int size = 3;
+    /*int size = 10;
     int nb_recherche = 100000;
     int present;
     t_list lst2 = create_list(size);
     startTimer();
     for(int i = 0;i<nb_recherche;i++)
-        present = dichotomie_research_cell(lst2, lst2.heads[size-1], 8);
-        printf("%d\n",present);
+        present = dichotomie_research_cell(lst2, lst2.heads[size-1], 3);
     stopTimer();
-    displayTime();
-    display_list(lst2);
+    displayTime();*/
 
     // CREATION DE 3 CONTACT
-    AGENDA  agenda = empty_agenda();
+    //AGENDA  agenda = empty_agenda();
     //p_CONTACT contact1 = create_contact();
     //insert_contact(&agenda, contact1);
 
