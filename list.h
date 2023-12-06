@@ -1,6 +1,7 @@
 #ifndef PROJET_C_LIST_H
 #define PROJET_C_LIST_H
 #include "cell.h"
+#include "timer.h"
 
 typedef struct s_list
 {
@@ -25,6 +26,9 @@ int level_0_research_cell(p_cell cell, int val); // Recherche basique
 int level_0_research_list(t_list list, int val);
 int dichotomie_research_cell(t_list lst, p_cell head, int val);
 int dichotomie_research(t_list list, int val);
+
+
+void timer_listNumber(int size_max);
 
 
 

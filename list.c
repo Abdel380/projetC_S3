@@ -1,5 +1,5 @@
 #include "list.h"
-
+#include <time.h>
 
 t_list create_empty_list(int max_size){
     t_list list;
@@ -177,5 +177,36 @@ int dichotomie_research_cell(t_list lst, p_cell cell, int value){
     else if(cell->value> value && cell->level>0) {
         return dichotomie_research_cell(lst, lst.heads[cell->level - 1], value) != 0;
     }
-
 }
+
+
+
+void timer_listNumber(int size_max){
+    int size_temp = 7;
+    int nombreAleatoire;
+    while (size_temp <= size_max){
+        t_list lst = create_list(size_temp);
+
+        int find;
+
+        startTimer();
+        for (int i=0; i<10000; i++){
+            nombreAleatoire = rand() % (power(2, size_temp)-1);
+            find = dichotomie_research_cell(lst, lst.heads[size_temp-1], nombreAleatoire);
+        }
+        stopTimer();
+        printf("Niveau %d\n==========\nDicotomique : ", size_temp);
+        displayTime();
+
+        startTimer();
+        for (int i=0; i<10000; i++){
+            nombreAleatoire = rand() % (power(2, size_temp)-1);
+            find = dichotomie_research_cell(lst, lst.heads[size_temp-1], nombreAleatoire);
+        }
+        stopTimer();
+        printf("==========\nStandart :");
+        displayTime();
+
+        size_temp++;
+    }
+};
