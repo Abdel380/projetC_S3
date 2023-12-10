@@ -1,4 +1,4 @@
 C:\Users\alex\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\alex\CLionProjects\projetC_S3 -B C:\Users\alex\CLionProjects\projetC_S3\cmake-build-debug
--- Configuring done (0.0s)
+-- Configuring done (0.3s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/alex/CLionProjects/projetC_S3/cmake-build-debug

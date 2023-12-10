@@ -160,7 +160,7 @@ date create_date() {
 
         if (result != 3) {
             printf("Incorrect format. Please use dd/mm/yyyy.\n");
-            // Vider le tampon d'entrée en cas d'une saisie incorrecte
+            // Clear the input buffer in case of incorrect input
             while (getchar() != '\n');
         }
 
@@ -207,7 +207,7 @@ app_hour create_hour(){
         if (result != 2) {
             printf("incorrect format. Please use  hh:mm.\n");
             // Clear input buffer in case of incorrect entry
-            while (getchar() != '\n');
+            cleanInputBuffer();
         }
 
     }while ( horaire.hour < 0 || horaire.hour > 23 || horaire.minute < 0 || horaire.minute > 59);
@@ -217,14 +217,11 @@ app_hour create_hour(){
 
 
 app_time create_time(){
-
     app_time  duree = empty_time();
-
     do{
         printf("How long does your appointment last (hh:mm):");
         scanf("%d:%d", &(duree.hour), &(duree.minute));
     }while ( duree.hour < 0 || duree.hour > 23 ||  duree.minute < 0 || duree.hour > 59 ); // all entries impossible
-
 
     return duree;
 }
@@ -233,14 +230,11 @@ app_time create_time(){
 p_app create_app(){
     p_app app = empty_app();
 
-
     app->object = create_object();
     app->d = create_date();
     app->hour = create_hour();
     app->time = create_time();
     cleanInputBuffer();
-
-
 
     return app;
 
@@ -250,7 +244,7 @@ void delete_appointment(p_Contact contact, p_app rdv){
     p_app temp = contact->app_head;
     p_app prev = NULL;
 
-    if ( rdv == contact->app_head){ //the appointment exists ans is at the first of the list
+    if ( rdv == contact->app_head){ //the appointment exists and is at the first of the list
         contact->app_head = contact->app_head->next;
         return;
     }
@@ -275,8 +269,6 @@ void delete_appointment(p_Contact contact, p_app rdv){
         prev->next = NULL;
     }
 }
-
-
 
 void insert_app(p_app app, p_Contact contact) {
     if (contact->app_head == NULL || compareDate(app->d, contact->app_head->d) == 0) {
@@ -334,11 +326,14 @@ void display_app(p_app rdv){
 }
 
 void display_Contact_appointment(t_Contact contact){
-    while(contact.app_head != NULL){
-
-        display_app(contact.app_head);
-        contact.app_head = contact.app_head->next;
-
+    if ( contact.app_head == NULL){
+        printf("There is no appointment !!\n");
+    }
+    else{
+        while(contact.app_head != NULL){
+            display_app(contact.app_head);
+            contact.app_head = contact.app_head->next;
+        }
     }
 }
 
@@ -358,7 +353,6 @@ void display_time(app_time duree){
     }
     return;
 }
-
 
 void display_hour(app_hour horaire){
     if (horaire.minute < 10){
@@ -409,10 +403,13 @@ void save_appointment_to_file(p_Contact contact){
         fprintf(appointment_file, "[%s,%d/%d/%d,%d:%d,%d:%d]", app->object.content, app->d.day, app->d.month, app->d.year, app->hour.hour, app->hour.minute, app->time.hour, app->time.minute);
         app = app->next;
     }
+    if(app == NULL){
+        fprintf(appointment_file,"[]");
+    }
     fprintf(appointment_file,"~");
     fprintf(appointment_file,"\n");
     fclose(appointment_file);
-    printf("Les données ont bien été enregistrées\n");
+    printf("The data has been registered\n");
 }
 
 char * get_name_from_lign(const char * lign ){
@@ -429,21 +426,11 @@ char * get_name_from_lign(const char * lign ){
 
 }
 
-
-
-
-
-
-
-
 p_app get_appointment_characteristics(char * app_char, char*nom){
 
     p_app app = empty_app();
 
     char **result = (char **)malloc(10 * sizeof(char*)); // create a table to store information
-
-
-
 
     splitToken(app_char,&result);
 
@@ -456,7 +443,6 @@ p_app get_appointment_characteristics(char * app_char, char*nom){
     get_hour_characteristics(result[2],app);
 
     get_time_characteristics(result[3],app);
-
 
 
     return app;
@@ -492,7 +478,6 @@ void get_date_characteristics(char * date, p_app rdv){
     rdv->d.month = atoi(temp);
     temp = strtok(NULL, "");
     rdv->d.year = atoi(temp);
-
 
 }
 

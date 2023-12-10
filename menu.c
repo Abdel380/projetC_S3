@@ -2,7 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu(Agenda * agenda){
+
+
+
+/*______________________________ MENU PART 1 ______________________________*/
+
+
+void menu_partie3(Agenda * agenda){
     clearScreen();
     header();
     page_1(agenda);
@@ -25,7 +31,7 @@ void page_1(Agenda * agenda){
         page_1(agenda);
     } else if (strcmp("clear", prompt) == 0){
         clearScreen();
-        menu(agenda);
+        menu_partie3(agenda);
     } else if (strcmp("create", prompt) == 0){
         create(agenda);
         page_1(agenda);
@@ -35,7 +41,7 @@ void page_1(Agenda * agenda){
     } else if (strcmp("add", prompt) == 0){
         add(agenda);
         page_1(agenda);
-    } else if (strcmp("showRDV", prompt) == 0){
+    } else if (strcmp("showAPP", prompt) == 0){
         showRDV(*agenda);
         printf("\n");
         page_1(agenda);
@@ -49,9 +55,34 @@ void page_1(Agenda * agenda){
         save(*agenda);
         printf("\n");
     }
+    else if(strcmp("delete",prompt) == 0){
+        printf("What is the object of the appointment you want to delete ?\n");
+        char * object = scanstring();
+        char * name = scan_name();
+        p_Contact contact = research_contact(agenda->contact_heads[3],name,3);
 
+        if(contact != NULL){
+
+            p_app temp = contact->app_head;
+            while(temp!=NULL && strcmp(temp->object.content,object)!=0){
+                temp = temp->next;
+            }
+            if(temp!= NULL){
+                delete_appointment(contact,temp);
+            }
+            else{
+                printf("Appointment doesn't exist !!\n");
+            }
+
+        }
+
+        else{
+            printf("Contact doesn't exist !!\n");
+        }
+        page_1(agenda);
+    }
     else {
-        printRed("Commande not found\n");
+        printRed("Command not found\n");
         page_1(agenda);
     }
 }
@@ -59,31 +90,30 @@ void page_1(Agenda * agenda){
 /*______________________________ FCTS ______________________________*/
 
 void help(){
-    printf("\nContact fonction :\n");
-    printf("create  : Creation d'un nouveau contact.\n");
-    printf("display : Affichage de tout les contact.\n");
-    printf("search  : Afficher un contact s'il existe.\n\n");
+    printf("\nContact function :\n");
+    printf("create  : New contact creation.\n");
+    printf("display : Display of all contacts.\n");
+    printf("search  : Display a contact if it exists.\n\n");
 
-    printf("Fonctions Rendez-Vous :\n");
-    printf("add     : Ajouter un nouveau rendez vous.\n");
-    printf("show : Afficher tout les rendez vous d'un contact.\n");
-    printf("delete  : Supprimer un rendez vous.\n\n");
+    printf("Appointment Functions :\n");
+    printf("add   : Add a new appointment.\n");
+    printf("showAPP: View all appointments of a contact.\n");
+    printf("delete : Delete an appointment.\n\n");
 
-    printf("Fonctions Fichier :\n");
-    printf("load    : Chargez les informations contenues dans le fichier sauvegarde.txt .\n");
-    printf("save    : Sauvegardez les informations dans le fichiers sauvegarde.txt .\n");
+    printf("File functions :\n");
+    printf("load   : Load the information contained in the backup.txt file.\n");
+    printf("save   : Save the information in the backup.txt file.\n");
 
-    printf("\nclear : Nettoyer la page d'acceuil.\n");
-    printf("mesure  : Mesurer le temp de calcul pour une insertion de nouveau contact.\n");
-    printf("exit    : Quitter\n");
-    printf("exitS   : Quitter en sauvgardant.\n\n");
+    printf("\nclear: Clean the acceuil page.\n");
+    printf("measurement : Measure calculation time for re-contact insertion.\n");
+    printf("exit   : Exit.\n");
+    printf("exitS   : Leave by saving.\n\n");
 }
 
 void create(Agenda * agenda){
-    printBlue("Oh ! Un nouveau contact :\n");
+    printBlue("Oh ! A new contact :\n");
     p_Contact contact1 = create_contact();
     insert_contact(agenda, contact1);
-    printf("Eh op, c'est dans la boite !");
 }
 
 void display(Agenda agenda){
@@ -112,11 +142,11 @@ void showRDV(Agenda agenda){
 void load(Agenda* agenda){
     printBlue("loading...\n");
     load_appointment_from_file(agenda);
-    printBlue("your contacts appointments have been loaded");
+    printBlue("Your contacts appointments have been loaded");
 }
 
 void save(Agenda agenda){
-    printf("saving...\n");
+    printf("Saving...\n");
     FILE * appointment_file = fopen("../appointement.csv","w");
     while(agenda.contact_heads[0] != NULL){
         save_appointment_to_file(agenda.contact_heads[0]);
@@ -124,7 +154,7 @@ void save(Agenda agenda){
 
     }
     fclose(appointment_file);
-    printf("your contacts appointment have been saved !\n");
+    printf("Your contacts appointment have been saved !\n");
 }
 
 

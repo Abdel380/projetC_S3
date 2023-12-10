@@ -14,13 +14,13 @@ void insert_contact(Agenda* agenda,p_Contact contact){
     p_Contact prev = temp;
 
 
-    if (temp == NULL){ // cas ou l'agenda est vide (aucun contact)
+    if (temp == NULL){ // case where the agenda is empty (no contact)
         for (int i=0; i<4; i++) // agenda is empty we fill the heads with the cells
             insert_by_level(agenda, contact, i, temp, 0);
     }
-    else if (strcmp(contact->name, temp->name) < 0){ // Cas où il y'a faut il inserer directement à gauche
+    else if (strcmp(contact->name, temp->name) < 0){ // Case where there is to insert directly to the left
         int level_next;
-        // On calcule le niveau de la cellule suivante après cette insertion
+        // The next cell level is calculated after this insertion
         if (temp->name[0] != contact->name[0]){
             level_next = 3;
         }
@@ -36,7 +36,7 @@ void insert_contact(Agenda* agenda,p_Contact contact){
         for (int i=0; i<4; i++) // we insert the contact at all levels we need
             insert_by_level(agenda, contact, i, temp, level_next);
     }
-    else{ // Cas ou : - la liste n'est ni vide,  - ni besoin d'inseret directement au debut.
+    else{ // Case or: - the list is neither empty,  - nor need to insert directly at the beginning.
         int level_next;
         while (strcmp(contact->name, temp->name) > 0 && temp->nexts[0] != NULL){ // determine in what place we have to insert the contact
             prev = temp;
@@ -260,11 +260,14 @@ void load_appointment_from_file(Agenda * agenda){
             i = strlen(name);
 
             p_Contact contact = empty_contact();
+            contact->name =name;
             while(lign[i]!='~'){  //while we aren't at the end of the lign
                 if(lign[i] == '['){
                     k = 0;
                     l = i+1; // we go to the next character after [
-
+                    if(lign[l] == ']'){
+                        break;
+                    }
                     while(lign[l]!=']'){ //to the next appointment
                         app_char[k] = lign[l]; //we take what's inside []
                         k++;
@@ -274,18 +277,16 @@ void load_appointment_from_file(Agenda * agenda){
                     app_char[k]='\0';
 
                     p_app app  = get_appointment_characteristics(app_char, name); //we separate the differents characteristics of an appointment and create one
-                    contact->name =name;
+
                     insert_app(app, contact);
 
 
                 }
 
+
                 ++i;
             }
-
             insert_contact(agenda,contact);
-
-
         }
 
 
@@ -324,11 +325,6 @@ void load_contact_from_file(Agenda * agenda){
 
 
         insert_contact(agenda,contact);
-
-
-
-
-
 
     }
     fclose(first_name_file);

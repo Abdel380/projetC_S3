@@ -25,22 +25,22 @@ typedef struct{
     char * content;
 }app_object;
 
-typedef struct s_RDV
+typedef struct s_App
 {
     date d;
     app_hour hour;
     app_time time;
     app_object object;
-    struct s_RDV * next; // tableau de pointeurs
+    struct s_App * next; // tableau de pointeurs
 } t_app, *p_app;
 
 
-typedef struct s_CONTACT
+typedef struct s_Contact
 {
     char * name;
     int level;
     p_app app_head; // tete de la liste
-    struct s_CONTACT ** nexts ; // tableau de pointeur
+    struct s_Contact ** nexts ; // tableau de pointeur
 } t_Contact, *p_Contact;
 
 // TOOLS

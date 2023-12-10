@@ -210,7 +210,7 @@ void timer_listNumber(int size_max){
         time_all_levels = getTimeAsString();
 
 
-        printf("==========\nDichotomique : ");
+        printf("==========\nDichotomic : ");
 
         displayTime();
 

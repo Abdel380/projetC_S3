@@ -2,7 +2,7 @@
 #define PROJET_C_MENU_H
 #include "agenda.h"
 
-void menu(Agenda * agenda);
+void menu_partie3(Agenda * agenda);
 
 void header();
 void page_1(Agenda * agenda);

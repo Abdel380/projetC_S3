@@ -9,9 +9,9 @@ p_cell createCell(int val, int level){
     }
     newcell->level = level;
     newcell->value = val;
-    newcell->nexts = malloc((level+1) * sizeof(p_cell)); // alloue la mémoire du tableau de pointeur
+    newcell->nexts = malloc((level+1) * sizeof(p_cell)); // allocates pointer array memory
     for(int i = 0; i < level+1; i++){
-        *(newcell->nexts+i) = NULL; // mets les pointeurs à NULL
+        *(newcell->nexts+i) = NULL; // set the pointers to NULL
     }
     return newcell;
 }
