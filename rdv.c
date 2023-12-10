@@ -414,15 +414,15 @@ void save_appointment_to_file(p_Contact contact){
 
 char * get_name_from_lign(const char * lign ){
 
-        int i = 0;
-        char * nom =  (char *)malloc(50 * sizeof(char));
+    int i = 0;
+    char * nom =  (char *)malloc(50 * sizeof(char));
 
-        while(lign[i] != '['){
-            nom[i] = lign[i];
-            ++i;
-        }
-        nom[i] = '\0';
-        return nom;
+    while(lign[i] != '['){
+        nom[i] = lign[i];
+        ++i;
+    }
+    nom[i] = '\0';
+    return nom;
 
 }
 

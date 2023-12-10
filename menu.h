@@ -1,12 +1,26 @@
 #ifndef PROJET_C_MENU_H
 #define PROJET_C_MENU_H
 #include "agenda.h"
+#include "list.h"
 
-void menu_partie3(Agenda * agenda);
 
+void menu(Agenda * agenda, t_list * lst);
 void header();
-void page_1(Agenda * agenda);
+void page(Agenda * agenda, t_list * lst);
+
+void menu_part2(Agenda * agenda, t_list * lst);
+void header_part2();
+void page_2(Agenda * agenda, t_list * lst);
+
+
+
+
+void menu_part3(Agenda * agenda, t_list * lst);
+
+void header_agenda();
+void page_1(Agenda * agenda, t_list * lst);
 void help();
+
 
 //FCTS
 void create(Agenda * agenda);

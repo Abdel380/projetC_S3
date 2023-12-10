@@ -149,12 +149,16 @@ void display_agenda_by_level(Agenda agenda, int level){
     p_Contact base = agenda.contact_heads[0];
     p_Contact cell = agenda.contact_heads[level];
     while (base != NULL){
+        int size = strlen(base->name);
         if (base == cell){
-            printf("-->[%s|%d|@-]", cell->name, cell->level);
+            printf("-->[%s|@-]", cell->name);
             cell = cell->nexts[level];
         }
         else{
-            printf("----------");
+            for(int i = 0; i<size; i++){
+                printf("-");
+            }
+            printf("--------");
         }
         base = base->nexts[0];
     }
